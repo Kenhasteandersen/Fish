@@ -4,7 +4,7 @@ source("Rcode/baseparameters.R")
 source("Rcode/community.R")
 
 getOlssonData <- function() {
-  data <- read.csv("Chapter3/fecundpruned.csv",header=TRUE,sep=",")
+  data <- read.csv("Data/fecundpruned.csv",header=TRUE,sep=",")
   data$Winf <- data$aW * data$Linf^data$bW
   data$Wm  <- data$aW * data$Lm^data$bW
   data$Phylum <- data$phyl
@@ -42,7 +42,7 @@ plotComparison <- function() {
   #
   # Data from Kooijman and Gislason:
   #
-  data2 = read.csv("Chapter3/KooijmanGislason.csv", header=FALSE, col.names=c("K","Linf","T"))
+  data2 = read.csv("Data/KooijmanGislason.csv", header=FALSE, col.names=c("K","Linf","T"))
   data2$Phylum = "t" # all teleost data
   data2$A <- calcA(data2$K, data2$Linf)
   #

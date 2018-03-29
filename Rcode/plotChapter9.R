@@ -642,7 +642,7 @@ plotCommunityMSY <- function(param=paramTraitbasedmodel(), n=20) {
   legend("right", bty="n", inset=c(-0.6,0), xpd=TRUE,
          legend=c(TeX("5 g < $\\textit{W}_{\\infty}$ < 150 g"),
                   TeX("150 g $\\leq$ $\\textit{W}_{\\infty}$ < 5 kg"),
-                  TeX("$\\textit{W}_{\\infty}$ $\\leq$ 5 kg")),  
+                  TeX("$\\textit{W}_{\\infty}$ $\\geq$ 5 kg")),  
          col=stdgrey, lwd=seq(1,3),
          title="Fleet")
 }
