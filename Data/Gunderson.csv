@@ -1,0 +1,29 @@
+Species, M, GSI, Linf, alpha, ref1, ref2, ref3, ref4
+Sand lance,   1.00, 0.47, 26.2, 3, 1, 2, 3, 1
+Northern anchovy,   0.92, 0.65, 16.6, 1, 4, 5, 6, 7
+Alewife,   0.70, 0.30, 19.9, 3, 8, 9, 10, 10
+Pacific herring,   0.56, 0.29, 26.3, 3, 11, 11, 12, 13
+Atlantic herring,   0.23, 0.19, 30.0, 4, 14, 15, 16, 17
+Pike,             0.33, 0.18, 81.5, 2, 18, 19, 19, 19
+Pollock,          0.25, 0.09, 58.0, 4, 20, 21, 20, 20
+Bering Sea cod,   0.37, 0.14, 97.0, 5, 22, 11, 22, 22
+Wash. cod,   0.65, 0.16, 86.6, 3, 23, 11, 24, 25
+North Sea cod,   0.20, 0.09, 114.8, 4, 26, 27, 28, 26
+St. Lawrence cod,   0.19, 0.13, 91.9, 6, 29, 30, 31, 32
+Northeast Arctic cod,   0.20, 0.09, 130.0, 10, 33, 34, 35, 36
+North Sea haddock,   0.20, 0.13, 52.5, 3, 37, 38, 39, 38
+Grand Banks haddock,   0.20, 0.10, 66.3, 6, 40, 41, 42, 43
+English sole,   0.26, 0.18, 37.2, 4, 44, 11, 45, 45
+American plaice,   0.23, 0.11, 59.4, 13, 46, 47, 46, 46
+Pacific halibut,   0.19, 0.11, 109.6, 12, 48, 49, 50, 49
+North Sea plaice,   0.10, 0.12, 68.5, 5, 37, 51, 37, 52
+North Sea sole,   0.10, 0.08, 32.9, 3, 53, 53, 53, 53
+Atlantic mackerel,   0.15, 0.09, 42.1, 2, 54, 55, 56, 57
+Sablefish,   0.10, 0.15, 71.9, 5, 58, 59, 60, 60
+Puget Sound rockfish,   0.44, 0.10, 15.0, 2, 61, 61, 61, 61
+Shortbelly rockfish,   0.26, 0.07, 29.5, 2, 62, 11, 62, 62
+Yellowtail rockfish,   0.14, 0.10, 48.5, 10, 63, 11, 64, 64
+Copper rockfish,   0.13, 0.11, 50.0, 6, 65, 11, 65, 66
+Pacific ocean perch,   0.05, 0.04, 47.0, 11, 67, 11, 68, 68
+Rougheye rockfish,   0.04, 0.02, 54.7, 20, 69, 11, 69, 70
+Dogfish,   0.09, 0.04, 112.6, 23, 71, 11, 72, 72

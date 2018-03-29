@@ -1,0 +1,37 @@
+Weight.mugDW;MinMortality;MaxMortality;Type
+10;0.0201;0.1789;Broadcast
+10;0.03;0.89;Broadcast
+6.675;0.006;0.167;Broadcast
+6.675;0.005;0.39;Broadcast
+6.675;0.06;0.33;Broadcast
+6.675;0.1;0.71;Broadcast
+9.951;0;1.165;Broadcast
+9.951;0;1.898;Broadcast
+9.951;0.38;1.17;Broadcast
+9.951;0.01;1.17;Broadcast
+9.951;0.1;0.41;Broadcast
+5;0.16;0.16;Broadcast
+5;0.02;0.02;Broadcast
+5;0.02;0.5;Broadcast
+299;0.022;0.367;Broadcast
+299;0.029;0.389;Broadcast
+645;0.003;0.008;Broadcast
+645;0.006;0.019;Broadcast
+201;0.06;0.33;Broadcast
+201;0;0.1;Broadcast
+25;0.07;0.07;Broadcast
+7.5;0.3;0.3;Broadcast
+37.375;0.015;1.25;Broadcast
+37.375;0.15;0.15;Broadcast
+37.375;0.05;0.22;Broadcast
+37.375;0.05;0.19;Broadcast
+37.375;0.007;0.3;Broadcast
+68.5;0.03;0.149;Broadcast
+5.75;0.05;1.61;Sac spawner
+5.75;0.04;0.78;Sac spawner
+5.75;0.021;0.791;Sac spawner
+5.75;0.005;0.932;Sac spawner
+5.75;0.017;0.891;Sac spawner
+5.75;0.007;1.864;Sac spawner
+21;0.11;0.11;Sac spawner
+11.75;0.035;0.172;Sac spawner
