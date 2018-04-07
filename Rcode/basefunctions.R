@@ -7,6 +7,8 @@
 #
 bRecalcExpensiveFunctions <- FALSE
 
+library(deSolve)
+
 # Length to weight calculation
 weight <- function(length)
 {
