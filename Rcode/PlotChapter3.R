@@ -1,8 +1,6 @@
 #
 # Chapter 3
 #
-library(deSolve)
-
 source("Rcode/basetools.R")
 source("Rcode/baseparameters.R")
 source("Rcode/basefunctions.R")

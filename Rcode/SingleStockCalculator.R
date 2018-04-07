@@ -5,10 +5,10 @@
 #  shinyApp(ui = SingleStockCalculatorUI, server = SingleStockCalculatorServer)
 #
 library(shiny)
-source("basetools.R")
-source("basefunctions.R")
-source("baseparameters.R")
-source("QuantitativeGenetics.R")
+source("Rcode/basetools.R")
+source("Rcode/basefunctions.R")
+source("Rcode/baseparameters.R")
+source("Rcode/QuantitativeGenetics.R")
 
 # Define the user interface
 SingleStockCalculatorUI <- fluidPage(
