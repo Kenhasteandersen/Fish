@@ -5,7 +5,7 @@
 #
 # Global flag:
 #
-bRecalcExpensiveFunctions <- FALSE
+bRecalcExpensiveFunctions <- TRUE  # Use pre-calculated values for heavy functions and previously downloaded databases from Fishbase
 
 library(deSolve)
 
@@ -24,11 +24,18 @@ weight2length <- function(weight)
 }
 
 # Calculate the A-parameter from observations of K and Linf:
-calcA <- function(K,Linf)
+calcA <- function(K,Linf, p=baseparameters())
 {
-  p <- baseparameters()
-  -p$c^(1-p$n) * p$etaM^(1-p$n)/((1-p$n)*log(1-p$etaM^(1/3))) *
-    K * Linf^(3*(1-p$n))
+  3*p$c^0.25 * p$etaM^(-1/12) * K * Linf^(3/4)
+  #-p$c^(1-p$n) * p$etaM^(1-p$n)/((1-p$n)*log(1-p$etaM^(1/3))) *
+  #  K * Linf^(3*(1-p$n))
+}
+# Calculate K from A and Linf:
+calcK <- function(A, Linf, p=baseparameters())
+{
+  A * Linf^(-3/4) / (3*p$c^0.25 * p$etaM^(-1/12) )
+  #p$A*(-p$c^(1-p$n) * p$etaM^(1-p$n)/((1-p$n)*log(1-p$etaM^(1/3))))^(-1) *
+  #  Linf^(-3*(1-p$n))
 }
 
 # The switching function

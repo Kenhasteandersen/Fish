@@ -320,7 +320,7 @@ plotImax <- function() {
   tmp[datImax$type=="Pisces"] = 1
   datImax$type2 <- factor(tmp,labels=c("Other","Fish"))
   
-  source("Chapter3/PlotAllChapter3.R")
+  #source("Rcode/PlotAllChapter3.R")
   dat3 <- getGrowthParameters()
   epsa <- 0.6
   f0 <- 0.6

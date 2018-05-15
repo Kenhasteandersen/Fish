@@ -170,7 +170,7 @@ plotSpectraFishing <- function()
     xlab(TeX("Relative weight $\\textit{w}/\\textit{W}_\\infty$"))+
     ylab(TeX("Biomass spectrum, $\\textit{wN}(\\textit{w})  ")) +
     geom_vline(xintercept = p$etaM, linetype="dotted", size=thin)
-  fig <- loglog(fig, ylim=c(1e-2,0.1), xlim=c(5e-3,1))
+  fig <- loglog(fig, ylim=c(5e-3,0.05), xlim=c(5e-3,1))
   
   ggsave("Chapter5/spectrumfishing.pdf", width=singlewidth, height=height)
   fig
@@ -364,7 +364,7 @@ plotRefPoints <- function()
     #scale_y_continuous(limit=c(0,1.5), oob=rescale_none) +
     xlab(TeX("Asymptotic size, $\\textit{W}_{\\infty}$ (g)")) +
     ylab(TeX("Fishing mortality, \\textit{F} (yr$^{-1}$)"))
-  fig <- semilogx(fig, ylim=c(0,1.6), xlim=c(4,1e5), label="a")
+  fig <- semilogx(fig, ylim=c(0,1.7), xlim=c(4,1e5), label="a")
   #
   # Add the ICES data points:
   #

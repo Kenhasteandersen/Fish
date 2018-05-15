@@ -11,7 +11,7 @@ baseparameters <- function(W=NULL)
   # Physiological parameters:
   p$W <- W
   p$n <- 3/4
-  p$A <- 4.39 # g^0.25 / yr
+  p$A <- 5.35 #4.39 # g^0.25 / yr
   p$epsA <- 0.6 # Assimilation efficiency
   p$epsEgg <- 0.22
   p$etaM <- 0.28
@@ -27,11 +27,11 @@ baseparameters <- function(W=NULL)
   # Reproduction:
   p$u <- 5
   p$w0 <- 0.001
-  p$epsR <- 0.02
+  p$epsR <- 0.03 #0.015
   p$ElasmobranchEggMassRatio <- 0.0044
   
   # Mortality:
-  p$a <- 0.34
+  p$a <- 0.425 # 0.34
   p$aMKconstant <- 1/4.83   # Relation between a and M/K
   
   # Fishing

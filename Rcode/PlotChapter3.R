@@ -176,8 +176,8 @@ panelEtam <- function()
               xlab="Asymptotic weight $\\textit{W}_\\infty$ (g)", 
               ylab="Rel. maturation size, $\\textit{\\eta}_\\textit{m}$",
               label=TRUE)
-  ixElasmo = data$Phylum=="Elasmobranchs"
-  ixTele = data$Phylum=="Teleosts"
+  ixElasmo = data$Phylum=="t"
+  ixTele = data$Phylum=="c"
   points(data$Winf[ixElasmo], data$etam[ixElasmo], pch=dots, col=stdgrey)
   points(data$Winf[ixTele], data$etam[ixTele], pch=dots)
   #
@@ -191,7 +191,7 @@ panelEtam <- function()
   lines(range(data$Winf), exp(fit$coefficients[1])*range(data$Winf)^fit$coefficients[2],
         lty=dashed, lwd=3)  
   # teleosts:
-  ix <- data$Phylum=="Teleosts"
+  ix <- data$Phylum=="t"
   fitfish <- lm(log(Wm[ix]/Winf[ix]) ~ log(Winf[ix]), data=data)
   tmp <- data.frame(x=data$Winf[ix], y=exp(predict(fitfish)))
   #fig <- fig + geom_line(data=tmp, aes(x=x,y=y), linetype="dotted")
