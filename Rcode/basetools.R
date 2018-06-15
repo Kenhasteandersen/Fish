@@ -124,12 +124,12 @@ defaultpanel <- function(xlim, ylim,
 }
 
 semilogxpanel <- function(xlim, ylim, xlab='', ylab='', 
-                          xaxis=TRUE, yaxis=TRUE, label=FALSE) {
+                          xaxis=TRUE, yaxis=TRUE, label=FALSE, new=FALSE) {
   ylim <- range(na.omit(ylim))
   xlim <- range(na.omit(xlim))
   plot(1, type='n', log='x',
        ylim=ylim, 
-       xlim=xlim, axes=FALSE, xlab='',ylab='')
+       xlim=xlim, axes=FALSE, xlab='',ylab='', par(new=new))
 
   mtext(side=bottom, line=1, TeX(xlab))
   mtext(side=left, line=1, TeX(ylab))
@@ -139,7 +139,7 @@ semilogxpanel <- function(xlim, ylim, xlab='', ylab='',
   logaxes(bottom, lim=xlim, labels=xaxis)
 #  if (yaxis)
   axis(left, labels=yaxis, lwd=axis.lwd, lwd.ticks=axis.lwd)
-  box()
+  box(lwd=axis.lwd)
 }
 
 semilogypanel <- function(xlim, ylim, xlab='', ylab='', 
@@ -153,7 +153,7 @@ semilogypanel <- function(xlim, ylim, xlab='', ylab='',
     makepanellabel()
   axis(bottom, labels=xaxis, lwd=axis.lwd, lwd.ticks=axis.lwd)
   logaxes(left, lim=ylim, labels=yaxis)
-  box()
+  box(lwd=axis.lwd)
 }
 
 loglogpanel <- function(xlim, ylim, xlab='', ylab='', 
@@ -248,6 +248,10 @@ ribbon <- function(x,ymin=NA,ymax,col=lightgrey) {
   x <- c(x, x[seq(length(x),1,by = -1)])
   polygon(x, c(ymin, ymax[seq(length(ymax),1,by = -1)]), col=col, border=NA)
 }
+
+tightaxes <- function()
+  par(xaxs="i", yaxs="i")
+
 #
 # ggplot plotting tools ==============================================
 #

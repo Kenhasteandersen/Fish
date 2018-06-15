@@ -32,18 +32,24 @@ paramTraitbasedmodel <- function(
   param$Tend <- 200
   param$dt <- 0.1
   param$stepSave <- 20
-  
+  #
+  # Mortality
+  #
   param$mu0Coefficient <- 1.2
   param$mu0Exponent <- -0.25
   param$muS0 <- 1
   param$F <- rep(0, param$nSpecies)
   param$SizeBasedMortCoef <- 0
-  
+  #
+  # Width of feeding preference
+  #
   param$sigma <- 1.3 # Increased from the default value (1) to represent a spread in different species' prey size preference
-  
-  param$KR <- 0.005
-  param$lambdaR <- -2-param$q+param$n
-  param$rR <- 4
+  #
+  # Resource parameters
+  #
+  param$KR <- 0.005 # Carrying capacity
+  param$lambdaR <- -2-param$q+param$n # Exponent
+  param$rR <- 4 # Productivity
   param$wRstart <- param$wrec / param$beta^2
   param$wRend <- min(param$W)/2
   param$thetaFish <- 1 # Preference for eating fish
@@ -82,21 +88,25 @@ paramTraitbasedmodel <- function(
 #
 # Base parameters for the single-species model embedded in a static community:
 #
-paramCommunitymodel <- function(W, facRmax) {
+paramConsumerResourcemodel <- function(W, facRmax) {
   param <- paramTraitbasedmodel(W=W)
-  # Fix recruitment
+  param$sigma <- 1 # Assume a single species with narrow feeding preference
+  
+  # Fix maximum recruitment. Set to high value to avoid the SR-relation
   param$Rmax <- facRmax * param$A * param$KR * param$w0^-param$a *
     W^(-2-param$q+2*param$n+param$a)
   
   param$wRend <- W  # Make an infinite resource spectrum
+  
   param$SizeBasedMortCoef <- param$A*param$a # Metabolic mortality
   param$mu0Coefficient <- 0 # No constant background mortality
+  
   # Fix gamma to use non-corrected f0
   alphae = sqrt(2*pi)*param$sigma*param$beta^(-param$lambdaR-2)* 
     exp((-param$lambdaR-2)^2*param$sigma^2/2);
   param$gamma <- param$f0*param$h / (alphae*param$KR*(1-param$f0)) 
   
-  param$thetaFish <- 0 # No cannibalism
+  param$thetaFish <- 1 # Cannibalism
   
   return(param)
 }
@@ -350,6 +360,9 @@ calcYield_vs_F <- function(param, res, iSpecies, nPoints=10) {
   p <- param
   F <- seq(0,1.5, length.out = nPoints)
   Yield <- 0*F
+  wgtmat = 0*F
+  SSB = 0*F
+  ress = list()
   p$Tend <- 50
   resF <- res
   for (i in 1:length(F)) {
@@ -358,8 +371,15 @@ calcYield_vs_F <- function(param, res, iSpecies, nPoints=10) {
     N <- resF$N[resF$nSave,iSpecies,]
     muF <- p$funcFishing(resF$fish$w,p)
     Yield[i] <- sum(N*resF$fish$w*resF$fish$dw*muF[iSpecies,])
+    
+    wgt = calcWeightAtAge(p, resF)
+    wgtmat[i] = wgt$w[which(wgt$ages > ageMaturation(p$W,p))[1]]
+    
+    SSB[i] = sum(N*resF$fish$w*resF$fish$dw*psi(resF$fish$w/(p$etaM*p$W)))
+    
+    ress[[i]] = resF
   }
-  data.frame(F=F, Yield=Yield)
+  data.frame(F=F, Yield=Yield, wmat=wgtmat, SSB=SSB)
 }
 #
 # Weight at age
@@ -401,12 +421,19 @@ plotTraitbasedmodel<- function(param, res)
   figSpec <- loglog(figSpec, ylim=c(1e-10,10), xlim=c(0.00001, 1e5)) +
     xlab("")
   #
-  # Plot feedinglevel:
+  # Plot feeding level:
   #
   figF <- ggplot() +
     geom_line(data=res$fish, aes(x=w, y=f)) +
     geom_hline(yintercept = param$f0, size=thin, linetype="dotted") +
     geom_hline(yintercept = param$fc, size=thin, linetype="dotted")
+  
+  w = res$fish$w
+  res$fish$loss = (res$fish$muP + param$SizeBasedMortCoef*w^(param$n-1)) /
+    (res$fish$f*param$h*w^(param$n-1))
+  figF <- figF +
+    geom_line(data=res$fish, aes(x=w, y=loss), color="red")
+  
   figF <- semilogx(figF)
   #
   # Plot mortality:
@@ -576,6 +603,50 @@ calcRefpointsTraitbasedmodel <- function(param, res0, iSpec=1:param$nSpecies) {
     #print(refpoints)
   }  
   return(refpoints)
+}
+
+testCommunitySingleSpeciesFishing <- function(W=20000, cannibalism=1) {
+  p <- paramCommunitymodel(W,100) # essentially without SR relation
+  p$thetaFish=cannibalism # no cannibalism
+  Y <- calcYield_vs_F(p, runspectrum(p), 1)
+  
+  p <- paramCommunitymodel(W,0.001) # dominated by SR relation
+  p$thetaFish=cannibalism
+  Ystd <- calcYield_vs_F(p, runspectrum(p), 1)
+  
+  defaultplot(mfcol=c(3,1))
+  #
+  # Yield vs F
+  #
+  defaultpanel(xlim=range(Y$F), ylim=c(0,1),
+               xlab="F", ylab="Relative yield")
+  lines(Y$F, Y$Yield/max(Y$Yield))
+  lines(Ystd$F, Ystd$Yield/max(Ystd$Yield), lty=2)
+  #
+  # Growth reduction
+  #
+  defaultpanel(xlim=range(Y$F), ylim=c(0, 1.2*p$etaM*W),
+               xlab="F", ylab("Weight at age of maturation"))
+  lines(Y$F,Y$wmat)
+  hline(p$etaM*W)
+  #
+  # Weight at age curves
+  #
+  defaultpanel(xlim=c(0,3*ageMaturation(W,p)), ylim=c(0,W),
+               xlab("age"), ylab="Weight")
+  
+  p <- paramCommunitymodel(W,100)
+  p$thetaFish=cannibalism # no cannibalism
+  F = c(0, 0.3, 0.6, 0.9, 1.2, 1.5)
+  for (i in 1:length(F)) {
+    p$F[1] <- F[i]
+    resF <- runspectrum(p)
+    
+    weightatage = calcWeightAtAge(p, resF)
+    lines(weightatage$ages, weightatage$w)
+  }
+  vline(ageMaturation(W,p))
+  
 }
 
 

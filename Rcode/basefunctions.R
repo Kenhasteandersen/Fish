@@ -5,7 +5,7 @@
 #
 # Global flag:
 #
-bRecalcExpensiveFunctions <- TRUE  # Use pre-calculated values for heavy functions and previously downloaded databases from Fishbase
+bRecalcExpensiveFunctions <- FALSE  # Use pre-calculated values for heavy functions and previously downloaded databases from Fishbase
 
 library(deSolve)
 
