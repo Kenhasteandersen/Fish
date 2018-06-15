@@ -4,7 +4,8 @@
 # Run the application with:
 #  shinyApp(ui = SingleStockCalculatorUI, server = SingleStockCalculatorServer)
 #
-setwd("~/Documents/Projects/Fish")
+# The line below must be uncommented to run locally
+#setwd("~/Documents/Projects/Fish")
 library(shiny)
 source("Rcode/basetools.R")
 source("Rcode/basefunctions.R")
