@@ -2,10 +2,10 @@
 # Chapter 8
 #
 
-source("Rcode/basetools.R")
-source("Rcode/basefunctions.R")
-source("Rcode/baseparameters.R")
-source("Rcode/community.R")
+source("R/basetools.R")
+source("R/basefunctions.R")
+source("R/baseparameters.R")
+source("R/community.R")
 
 require(cowplot)
 require(gam)
@@ -247,46 +247,6 @@ plotExtendedSheldon <- function() {
 }
 
 
-plotGrowthF0 <- function() {
-  require(deSolve)
-  
-  f0 <- c(0.4, 0.6, 0.8)  # The feeding levels to use for the plot
-  
-  ages = seq(0,50,length.out=500)
-  dat <- data.frame(age=NULL, f0=NULL, w=NULL, R=NULL)
-  for (i in 1:length(f0)) {
-    #
-    # Size at age
-    #
-    
-    W = 2000
-    p <- baseparameters()  
-    p$W <- W
-    etaM <- p$etaM
-    p$A <- p$epsA*p$h*(f0[i]-p$fc)
-    
-    
-    # Interval:
-    out <- ode(y=p$w0, times=ages, func=function(t,w,p) list(growth(p,w)), parms=p)
-    w <- out[,2]
-    R <- p$epsEgg*p$A*w^p$n*psi(w/(p$etaM*p$W)) * (w/p$W)^(1-p$n)
-    dat <- rbind(dat, 
-                 data.frame(age=out[,1], f0=as.factor(f0[i]), w=w, R=R))
-  }
-  
-  defaultplot()
-  defaultpanel(xlim=c(0,35), ylim=c(0,2000),
-               xlab="Age (years)", ylab="Weight (g)")
-  # Weight:
-  for (i in f0) 
-    lines(dat$age[dat$f0==i], dat$w[dat$f0==i], lwd=1.5+1.5*(i==0.6))
-  hline(y=p$W)
-  hline(y=p$etaM*p$W)
-
-  # Repro:
-  for (i in f0) 
-    lines(dat$age[dat$f0==i], dat$R[dat$f0==i], lwd=1.5+1.5*(i==0.6), col=stdgrey)
-}
 
 
 plotRmaxSensitivity <- function() {
@@ -419,7 +379,6 @@ plotAllChapter8 <- function()
 {
   pdfplot("Chapter8/spectra.pdf", plotSpectra, width=doublewidth, height = height)
   pdfplot("Chapter8/ExtendedSheldon.pdf", plotExtendedSheldon, width=singlewidth, height=height)
-  pdfplot("Chapter8/GrowthF0.pdf", plotGrowthF0, width=singlewidth, height=height)
   pdfplot("Chapter8/RmaxSensitivity.pdf", plotRmaxSensitivity, width=1.5*singlewidth, height=height)
 
   plotDynamicCommunity()

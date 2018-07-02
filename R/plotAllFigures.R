@@ -6,32 +6,32 @@ rm(list=ls())
 # 
 # Note: update the flag "bRecalcExpensiveFunctions <- FALSE" in basefunction.R
 #
-source("Rcode/PlotChapter2.R")
+source("R/PlotChapter2.R")
 plotAllChapter2()
 
-source("Rcode/PlotChapter3.R")
+source("R/PlotChapter3.R")
 plotAllChapter3()
 
-source("Rcode/PlotChapter4.R")
+source("R/PlotChapter4.R")
 plotAllChapter4()
 
-source("Rcode/PlotChapter5.R")
+source("R/PlotChapter5.R")
 plotAllChapter5()
 
-source("Rcode/PlotChapter6.R")
+source("R/PlotChapter6.R")
 plotAllChapter6()
 
-source("Rcode/PlotChapter7.R")
+source("R/PlotChapter7.R")
 plotAllChapter7()
 
-source("Rcode/PlotChapter8.R")
+source("R/PlotChapter8.R")
 plotAllChapter8()
 
-source("Rcode/PlotChapter9.R")
+source("R/PlotChapter9.R")
 plotAllChapter9()
 
-source("Rcode/PlotChapter10.R")
+source("R/PlotChapter10.R")
 plotAllChapter10()
 
-source("Rcode/PlotChapter11.R")
+source("R/PlotChapter11.R")
 plotAllChapter11()

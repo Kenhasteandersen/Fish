@@ -1,4 +1,4 @@
-source('Rcode/QuantitativeGenetics.R')
+source('R/QuantitativeGenetics.R')
 
 plotConover <- function() {
   defaultplot(mfcol=c(1,2))

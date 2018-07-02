@@ -1,7 +1,7 @@
-source("Rcode/basetools.R")
-source("Rcode/basefunctions.R")
-source("Rcode/baseparameters.R")
-source("Rcode/community.R")
+source("R/basetools.R")
+source("R/basefunctions.R")
+source("R/baseparameters.R")
+source("R/community.R")
 require(jpeg)
 
 calcEigenvalue <- function(p) {

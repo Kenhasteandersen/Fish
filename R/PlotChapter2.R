@@ -2,10 +2,10 @@
 # Plots for chapter 2
 # 
 
-source("Rcode/basetools.R")
-source("Rcode/basefunctions.R")
-source("Rcode/baseparameters.R")
-source("Rcode/PlotChapter3.R")
+source("R/basetools.R")
+source("R/basefunctions.R")
+source("R/baseparameters.R")
+source("R/PlotChapter3.R")
 
 plotSheldon <- function() {
   data <- read.csv("Data/sheldon.dat")
@@ -320,7 +320,7 @@ plotImax <- function() {
   tmp[datImax$type=="Pisces"] = 1
   datImax$type2 <- factor(tmp,labels=c("Other","Fish"))
   
-  #source("Rcode/PlotAllChapter3.R")
+  #source("R/PlotAllChapter3.R")
   dat3 <- getGrowthParameters()
   epsa <- 0.6
   f0 <- 0.6

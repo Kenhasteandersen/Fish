@@ -1,9 +1,9 @@
 #
 # Chapter 3
 #
-source("Rcode/basetools.R")
-source("Rcode/baseparameters.R")
-source("Rcode/basefunctions.R")
+source("R/basetools.R")
+source("R/baseparameters.R")
+source("R/basefunctions.R")
 
 getGrowthParameters <- function()
 {

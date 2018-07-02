@@ -1,7 +1,50 @@
-source("Rcode/basetools.R")
-source("Rcode/basefunctions.R")
-source("Rcode/baseparameters.R")
-source("Rcode/community.R")
+source("R/basetools.R")
+source("R/basefunctions.R")
+source("R/baseparameters.R")
+source("R/community.R")
+
+plotGrowthF0 <- function() {
+  require(deSolve)
+  
+  f0 <- c(0.4, 0.6, 0.8)  # The feeding levels to use for the plot
+  
+  ages = seq(0,50,length.out=500)
+  dat <- data.frame(age=NULL, f0=NULL, w=NULL, R=NULL)
+  for (i in 1:length(f0)) {
+    #
+    # Size at age
+    #
+    
+    W = 2000
+    p <- baseparameters()  
+    p$W <- W
+    etaM <- p$etaM
+    p$A <- p$epsA*p$h*(f0[i]-p$fc)
+    
+    
+    # Interval:
+    out <- ode(y=p$w0, times=ages, func=function(t,w,p) list(growth(p,w)), parms=p)
+    w <- out[,2]
+    R <- p$epsEgg*p$A*w^p$n*psi(w/(p$etaM*p$W)) * (w/p$W)^(1-p$n)
+    dat <- rbind(dat, 
+                 data.frame(age=out[,1], f0=as.factor(f0[i]), w=w, R=R))
+  }
+  
+  defaultplot()
+  defaultpanel(xlim=c(0,35), ylim=c(0,2000),
+               xlab="Age (years)", ylab="Weight (g)")
+  # Weight:
+  for (i in f0) 
+    lines(dat$age[dat$f0==i], dat$w[dat$f0==i], lwd=1.5+1.5*(i==0.6))
+  hline(y=p$W)
+  hline(y=p$etaM*p$W)
+  
+  # Repro:
+  for (i in f0) 
+    lines(dat$age[dat$f0==i], dat$R[dat$f0==i], lwd=1.5+1.5*(i==0.6), col=stdgrey)
+}
+
+
 
 plotSpectra_ConsumerResourceModel <- function(W=1000) {
   p = paramConsumerResourcemodel(W, 1e-8) # std. model driven by SR relation
@@ -16,15 +59,22 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   #
   wrange = c(0.1,W)
   loglogpanel(xlim = wrange, 
-              ylim=c(10, 1e6),
+              ylim=c(5, 1e6),
               ylab = "Spectrum, \\textit{Nw^2/(N(w_0)w_0^2)} (g)",
-              xlab = "Weight (g)")
-  
+              xlab = "Weight (g)", label=TRUE)
+  # Resource:
+  # wR = r$resource$wR
+  # NR = r$resource$NR/r$N[r$nSave,1,1]*(wR/p$w0)^2
+  # KR = p$KR * wR^(p$lambdaR)/r$N[r$nSave,1,1]*(wR/p$w0)^2
+  # ribbon(wR, NR, KR)
+  # lines(wR, NR, lwd=2, col=stdgrey)
+  # lines(wR, KR, lwd=2, col=stdgrey, lty=dashed)
+
   w = r$fish$w
   lines(w, r_std$N[r$nSave,1,]/r_std$N[r$nSave,1,1]*(w/p$w0)^2, lty=dashed, lwd=2)
   lines(w, r$N[r$nSave,1,]/r$N[r$nSave,1,1]*(w/p$w0)^2, lwd=2)
   
-  legend("topleft", 
+  legend("bottomright", 
          legend=c("Early-life density dep.", "Emergent density dep."), 
          lwd=2, lty=c(dashed,1),
          bty="n")
@@ -34,14 +84,16 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   semilogxpanel(xlim = wrange, 
                 ylim=c(0,1),
                 ylab = "Feeding and loss",
-                xlab = "Weight (g)")
+                xlab = "Weight (g)",
+                label = TRUE)
   # feeding
   f0 = r_std$fish$f
   f = r$fish$f
   ribbon(w, ymax=f0, ymin=f)
-  lines(w, f0, lty=dashed, lwd=2)
-  lines(w, f, lwd=2)
+  lines(w, f0, lty=dashed, lwd=2, col=darkgrey)
+  lines(w, f, lwd=2, col=darkgrey)
   
+  text(x=0.1, y=0.64, "Feeding", pos=4)
   fmin = min(f)
   arrows(x1=w[which(f==fmin)], y1=fmin,
          x=w[which(f==fmin)], y=fmin-0.1,
@@ -49,6 +101,7 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   text(x=60, y=fmin-0.1,
        labels="Resource-driven\nbottleneck",
        pos=1)
+  
   # loss
   ref = p$h*w^(p$n-1)
   mort = p$SizeBasedMortCoef*w^(p$n-1)
@@ -58,12 +111,13 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   lines(w, loss_std, lty=dashed, lwd=2)
   lines(w, loss, lwd=2)
   
+  text(x=0.1, y=0.05, "Loss", pos = 4)
   lossmax = max(loss)
   w1 = w[which(loss==lossmax)]
   arrows(x1=w1, y1=lossmax,
          x=w1, y=lossmax+0.1,
          length=0.1)
-  text(x=w1, y=lossmax+0.1,
+  text(x=w1, y=lossmax+0.075,
        labels="Cannibalistic\nbottleneck",
        pos=3, adj=0.5)
   #
@@ -72,7 +126,8 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   semilogxpanel(xlim = wrange,
                 ylim = c(0,7),
                 ylab = "Mortality (yr$^{-1}$)", 
-                xlab = "Weight (g)")
+                xlab = "Weight (g)",
+                label = TRUE)
   
   ribbon(w, ymin=mort, ymax=mort+r$fish$muP)
   lines(w, mort, lty=dashed, lwd=2)
@@ -83,11 +138,13 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   defaultpanel(xlim = c(0,30),
                ylim = c(0,W),
                xlab = "Age",
-               ylab = "Weight (g)")
+               ylab = "Weight (g)",
+               label = TRUE)
   
   wa_std = calcWeightAtAge(p, r_std) # calc without DD
   wa = calcWeightAtAge(p, r)
   
+  ribbon(wa$ages, wa_std$w, wa$w)
   lines(wa_std$ages, wa_std$w, lwd=2, lty=dashed)
   lines(wa$ages, wa$w, lwd=2)
 }
@@ -144,7 +201,7 @@ plotFishingvsWf <- function(W=1000, n=20) {
   defaultplothorizontal(nPanel=3)
   # make room for titles:
   oma <- par()$oma
-  oma[top]<-2
+  oma[top]<-1.5
   par(oma=oma) 
   
   tightaxes()
@@ -153,6 +210,7 @@ plotFishingvsWf <- function(W=1000, n=20) {
   contour(x=etaF, y=F, z=Y[1,,],
           drawlabels=FALSE, frame.plot=FALSE, add=TRUE,
           levels=seq(0,1,length.out = 10), axes=FALSE)
+  semilogxpanel(xlim=etaF, ylim=F, ylab="Fishing mortality (yr$^{-1})", new=TRUE)
   mtext(side=top, line=0.5, "Early density dep.")
   
   semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE,
@@ -162,6 +220,8 @@ plotFishingvsWf <- function(W=1000, n=20) {
   contour(x=etaF, y=F, z=Y[2,,],
           drawlabels=FALSE, frame.plot=FALSE, add=TRUE,
           levels=seq(0,1,length.out = 10), axes=FALSE)
+  semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE,
+                xlab="Start of fishing relative to asymptotic size", new=TRUE)
   mtext(side=top, line=0.5, "Competition")
   
   semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE)
@@ -170,6 +230,7 @@ plotFishingvsWf <- function(W=1000, n=20) {
   contour(x=etaF, y=F, z=Y[3,,],
           drawlabels=FALSE, frame.plot=FALSE, add=TRUE,
           levels=seq(0,1,length.out = 10), axes=FALSE)
+  semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE, new=TRUE)
   mtext(side=top, line=0.5, "Competition + cannibalism")
 }
 
@@ -241,22 +302,28 @@ plotOptimalEtaF <- function(W=1000, nPoints = 10) {
   defaultplothorizontal(nPanel=2)
   
   loglogpanel(xlim=Rmaxscaled, ylim=c(0.001,1), 
-              xlab="\\textit{R}_{max} factor  (g)", 
+              xlab="\\textit{R}_{max}/\\tilde{\\textit{R}}_{max}", 
               ylab="Optimal selection, $\\eta^*_\\textit{F}",
               label=TRUE)
+  
   lines(Rmaxscaled, etaFoptRmax[1,], lwd=2)
   lines(Rmaxscaled, etaFoptRmax[2,], lwd=2, lty=dashed)
   lines(Rmaxscaled, etaFoptRmax[1,1]*Rmaxscaled/Rmaxscaled, lty=dotted)
+  
   legend("bottomleft", 
          legend=c("Stock-recruitment", "Emergent", "Emergent with cannibalism"), 
          lwd=c(1,2,2), lty=c(dotted,1,dashed),
          bty="n")
   
   loglogpanel(xlim=W, ylim=c(0.001,1),
-              xlab="Asymptotic size (g)", yaxis = FALSE, label=TRUE)
+              xlab="Asymptotic size (g)", yaxis = FALSE)
+  makepanellabel(line = -2)
+  
   lines(W, etaFoptW[1,], lty=dotted)
   lines(W, etaFoptW[2,], lwd=2)
   lines(W, etaFoptW[3,], lwd=2, lty=dashed)
+  
+  
   
 }
 
@@ -431,6 +498,7 @@ compareModels <- function(W=1000) {
 }
 
 plotAllChapter7b = function() {
+  pdfplot("Chapter7b/GrowthF0.pdf", plotGrowthF0, width=singlewidth, height=height)
   pdfplot("Chapter7b/Spectra_ConsumerResourceModel.pdf", 
           plotSpectra_ConsumerResourceModel, width=doublewidth, height = 2*height)
   pdfplot("Chapter7b/ConsumerResourceVariation.pdf",

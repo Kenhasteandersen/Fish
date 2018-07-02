@@ -1,6 +1,6 @@
-source("Rcode/basetools.R")
-source("Rcode/basefunctions.R")
-source("Rcode/baseparameters.R")
+source("R/basetools.R")
+source("R/basefunctions.R")
+source("R/baseparameters.R")
 
 getOlssonData <- function() {
   data <- read.csv("Data/fecundpruned.csv",header=TRUE,sep=",")
