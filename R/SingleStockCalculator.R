@@ -7,10 +7,10 @@
 # The line below must be uncommented to run locally
 #setwd("~/Documents/Projects/Fish")
 library(shiny)
-source("Rcode/basetools.R")
-source("Rcode/basefunctions.R")
-source("Rcode/baseparameters.R")
-source("Rcode/QuantitativeGenetics.R")
+source("R/basetools.R")
+source("R/basefunctions.R")
+source("R/baseparameters.R")
+source("R/QuantitativeGenetics.R")
 
 # Define the user interface
 SingleStockCalculatorUI <- fluidPage(
