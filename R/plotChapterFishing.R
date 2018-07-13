@@ -90,7 +90,7 @@ plotSelectivity <- function()
     annotate("text", x=30, y=1.12,label="Trap", hjust=0)
   fig4 <- mytheme(fig4)
   
-  pdf("Chapter5/selectivity.pdf", width=doublewidth, height=2*height, useDingbats=FALSE)
+  pdf("ChapterFishing/selectivity.pdf", width=doublewidth, height=2*height, useDingbats=FALSE)
   multiplot(fig1,fig2,fig3,fig4, cols=2)
   dev.off()
 }
@@ -114,7 +114,7 @@ plotTrawl <- function()
     ylab(TeX("Fishing mort., $\\mu_{\\textit{F}}$ (yr$^{-1}$)")) 
   fig <- semilogx(fig, xlim=c(1e-1,1e5), ylim=c(0,1))
   #fig <- mytheme(fig)
-  ggsave("Chapter5/trawl.pdf",width=singlewidth, height=height)
+  ggsave("ChapterFishing/trawl.pdf",width=singlewidth, height=height)
   fig
 }
 
@@ -172,7 +172,7 @@ plotSpectraFishing <- function()
     geom_vline(xintercept = p$etaM, linetype="dotted", size=thin)
   fig <- loglog(fig, ylim=c(5e-3,0.05), xlim=c(5e-3,1))
   
-  ggsave("Chapter5/spectrumfishing.pdf", width=singlewidth, height=height)
+  ggsave("ChapterFishing/spectrumfishing.pdf", width=singlewidth, height=height)
   fig
 }
 
@@ -326,10 +326,10 @@ plotFishingComplete <- function()
   }
   
   fig <- panel(333, TRUE) + xlab("")
-  ggsave("Chapter5/fishingmain.pdf",width=0.75*doublewidth, height=0.75*2*height)
+  ggsave("ChapterFishing/fishingmain.pdf",width=0.75*doublewidth, height=0.75*2*height)
   
   
-  pdf("Chapter5/fishingsubs.pdf", width=doublewidth, height=height)
+  pdf("ChapterFishing/fishingsubs.pdf", width=doublewidth, height=height)
   multiplot(panel(10),panel(10000), cols=2)
   dev.off()
 }
@@ -390,7 +390,7 @@ plotRefPoints <- function()
   figB <- semilogx(figB, xlim=c(4,1e5), label=" b") 
   figB
   
-  pdf("Chapter5/refpoints.pdf", width=doublewidth, height=height, useDingbats = FALSE)
+  pdf("ChapterFishing/refpoints.pdf", width=doublewidth, height=height, useDingbats = FALSE)
   multiplot(fig, figB, cols=2)
   dev.off()
 }
@@ -450,7 +450,7 @@ plotRefvs_a <- function()
   
   grid = plot_grid(fig1,fig2,fig3, ncol=3, align="h",
                    rel_widths = c(1.26,1,1))
-  ggsave("Chapter5/refpointsvsa.pdf", grid, width=doublewidth, height=height)
+  ggsave("ChapterFishing/refpointsvsa.pdf", grid, width=doublewidth, height=height)
 }
 
 
@@ -570,7 +570,7 @@ plotRefvs_eps2 <- function()
     xlab(TeX("Recruitment efficiency $\\epsilon_\\textit{R}$")) +
     ylab(TeX("$\\textit{F}_{msy}$ (yr$^{-1}$)"))
     
-  ggsave("Chapter5/refsvs_eps.pdf", width=singlewidth, height=height)
+  ggsave("ChapterFishing/refsvs_eps.pdf", width=singlewidth, height=height)
   fig
 
 }
@@ -747,7 +747,7 @@ plotYield <- function(n=50)
                     fig1[[2]],fig2[[2]],fig3[[2]],
                     fig1[[3]],fig2[[3]],fig3[[3]],
                     nrow=2, align="hv")
-  ggsave("Chapter5/yield.pdf", grid, width=doublewidth, height=2*height)
+  ggsave("ChapterFishing/yield.pdf", grid, width=doublewidth, height=2*height)
 }
 
 
@@ -761,14 +761,14 @@ plotYield <- function(n=50)
 # }
 # apply(x, 1, YY)
 
-plotAllChapter5 <- function()
+plotAllChapterFishing <- function()
 {
   plotSelectivity()
   plotTrawl()
   plotSpectraFishing()
   
   grid <- plot_grid(plotFishing(), plotRecruitmentFishing(), ncol=2, align="h")
-  ggsave("Chapter5/fishing.pdf", grid, width=doublewidth, height=height)
+  ggsave("ChapterFishing/fishing.pdf", grid, width=doublewidth, height=height)
   
   plotFishingComplete()
   plotRefPoints()

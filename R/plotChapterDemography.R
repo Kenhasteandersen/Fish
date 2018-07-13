@@ -40,7 +40,7 @@ plotSpectrum <- function()
   #multiplot(fig, fig1, cols=2)
   #dev.off()
   grid <- plot_grid(fig, fig1, align="h", ncol=2)
-  ggsave("Chapter4/spectra.pdf", grid, width=doublewidth, height=height)
+  ggsave("ChapterDemography/spectra.pdf", grid, width=doublewidth, height=height)
   grid
 }
 
@@ -61,7 +61,7 @@ plotCohort <- function()
     labs(x=TeX('Relative weight $\\textit{w}/\\textit{W}_\\infty$')) + 
     ylab("Cohort biomass")
   fig <- loglog(fig, ylim=c(1,100))
-  ggsave("Chapter4/cohort.pdf",width=singlewidth,height=height)
+  ggsave("ChapterDemography/cohort.pdf",width=singlewidth,height=height)
   fig  
 }
 
@@ -85,7 +85,7 @@ plotCohort_for_presentation <- function() {
       labs(x=TeX('Weight (g)')) + 
       ylab("Increase in cohort biomass")
     fig <- loglog(fig, ylim=c(1,1e6), xlim=c(1e-3, max(W)))
-    ggsave(paste("Chapter4/cohort Presentation",i,".pdf"),width=doublewidth,height=2*height)
+    ggsave(paste("ChapterDemography/cohort Presentation",i,".pdf"),width=doublewidth,height=2*height)
     fig  
   }
   # Sharks
@@ -95,7 +95,7 @@ plotCohort_for_presentation <- function() {
   fig <- fig +
     geom_line(data=NN, aes(x=w, y=NprR/NprR[1] * w/pp$w0 * g/g[1]), size=1, color="red")
   fig <- loglog(fig, ylim=c(1,1e6), xlim=c(1e-3, max(W)))
-  ggsave(paste("Chapter4/cohort Presentation 4.pdf"),width=doublewidth,height=2*height)
+  ggsave(paste("ChapterDemography/cohort Presentation 4.pdf"),width=doublewidth,height=2*height)
   
 }
 
@@ -128,7 +128,7 @@ plotR0 <- function() {
       ylab(TeX("Eggs per recruit, $\\textit{R}_0$"))
   fig <- loglog(fig, ylim=c(0.5,1000))
 
-  ggsave("Chapter4/R0.pdf",width=singlewidth,height=height)
+  ggsave("ChapterDemography/R0.pdf",width=singlewidth,height=height)
   fig  
 }
 
@@ -186,7 +186,7 @@ plotBH <- function()
   #multiplot(fig1,fig2,cols=2)
   #dev.off()
   grid <- plot_grid(fig1,fig2,align="h")
-  ggsave("Chapter4/BH.pdf", grid, width=doublewidth, height=height)
+  ggsave("ChapterDemography/BH.pdf", grid, width=doublewidth, height=height)
   grid
 }
 
@@ -281,7 +281,7 @@ plotAlpha <- function()
   p <- baseparameters()
   W <- 10^seq(1,5,length.out = 100)
   
-  alpha <- read.csv("Chapter4/Hall et al alpha data.csv", header=TRUE)
+  alpha <- read.csv("ChapterDemography/Hall et al alpha data.csv", header=TRUE)
   alpha$W <- weight(exp(alpha$log.Linf))
   alpha$alpha <- exp(alpha$log.alpha.)
   Linf <- weight2length(W)
@@ -298,7 +298,7 @@ plotAlpha <- function()
     ylab(TeX("Recruiment $\\alpha$ (#/yr/g)"))
   fig <- loglog(fig, ylim=c(0.01,2000))
 
-  ggsave("Chapter4/alpha.pdf", width=singlewidth, height=height)
+  ggsave("ChapterDemography/alpha.pdf", width=singlewidth, height=height)
   fig
 }
 
@@ -351,7 +351,7 @@ plot_acrit <- function()
     scale_y_continuous(oob=rescale_none, expand=c(0,0), limits=c(0,1))
   fig <- mytheme(fig)
   
-  ggsave("Chapter4/acrit.pdf", width=singlewidth, height=height)
+  ggsave("ChapterDemography/acrit.pdf", width=singlewidth, height=height)
   fig
 }
 
@@ -388,13 +388,13 @@ plotGislasonMK <- function()
     scale_x_continuous(limit=c(0,1.2), oob=rescale_none)
   fig <- mytheme(fig)
 
-  ggsave("Chapter4/a.pdf", width=singlewidth, height=height)
+  ggsave("ChapterDemography/a.pdf", width=singlewidth, height=height)
   fig
   
 }
 
 testHerring <- function() {
-  dat <- read.table("Chapter4/Herring_ICES30.csv", header=TRUE, sep=";")
+  dat <- read.table("ChapterDemography/Herring_ICES30.csv", header=TRUE, sep=";")
   defaultplot()
   defaultpanel(xlim=c(0,1e6), ylim=dat$R)
   points(dat$SSB, dat$R, type="b")
@@ -408,7 +408,7 @@ testHerring <- function() {
   lines(SSB, Rmax*alpha*SSB/(alpha*SSB+Rmax), col="red")
 }
 
-plotAllChapter4 <- function()
+plotAllChapterDemography <- function()
 {
   plotSpectrum()
   plotCohort()

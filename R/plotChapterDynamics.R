@@ -422,12 +422,12 @@ plotDynamics <- function() {
     
     if (i==1) {
       mtext('     SSB/max(SSB)', side=left, line=1.5, adj=0)
-      img<-readJPEG("Chapter7/Sardinops_sagax open.jpg")
+      img<-readJPEG("ChapterDynamics/Sardinops_sagax open.jpg")
       rasterImage(img, 15, 0.02, 18, 0.05)
     }
     else {
       mtext(TeX('  R/$R_{max};   $'), side=left, line=1.5, col=stdgrey, adj=1)
-      img <- readJPEG("Chapter7/Atlantic_cod open.jpg")
+      img <- readJPEG("ChapterDynamics/Atlantic_cod open.jpg")
       rasterImage(img, 11, 0.02, 19, 0.25)
     }
     
@@ -699,9 +699,9 @@ plotNoisyFishing <- function() {
       R0[j,] <- unlist(results[2,])
       r[j,] <- unlist(results[3,])
     }
-    save(CV,R0,r,ref, file="Chapter7/NoisyFishing.RData")
+    save(CV,R0,r,ref, file="ChapterDynamics/NoisyFishing.RData")
   } else
-    load("Chapter7/NoisyFishing.RData")
+    load("ChapterDynamics/NoisyFishing.RData")
   
   defaultplot()
   defaultpanel(xlim=F, ylim=c(0,6), 
@@ -781,11 +781,11 @@ testcalcUnstructuredDynamics <- function(W) {
 
 
 
-plotAllChapter7 <- function() {
-  pdfplot(FUN=plotEigen, "Chapter7/eigen.pdf", width=doublewidth, height=height)
-  pdfplot(FUN=plotDynamics, "Chapter7/dynamics.pdf", width=1.5*singlewidth, height=1.5*height)
-  pdfplot(FUN=plotRecoveryExample, "Chapter7/recoveryexample.pdf", width=doublewidth, height=height)
-  pdfplot(FUN=plotRecovery, "Chapter7/recovery.pdf", width=doublewidth, height=height)
-  pdfplot(FUN=plotNoisyRecruitment, "Chapter7/noisyrecruitment.pdf", width=doublewidth, height=height)
-  #pdfplot(FUN=plotNoisyFishing, "Chapter7/noisyfishing.pdf", width=singlewidth, height=height)
+plotAllChapterDynamics <- function() {
+  pdfplot(FUN=plotEigen, "ChapterDynamics/eigen.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotDynamics, "ChapterDynamics/dynamics.pdf", width=1.5*singlewidth, height=1.5*height)
+  pdfplot(FUN=plotRecoveryExample, "ChapterDynamics/recoveryexample.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotRecovery, "ChapterDynamics/recovery.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotNoisyRecruitment, "ChapterDynamics/noisyrecruitment.pdf", width=doublewidth, height=height)
+  #pdfplot(FUN=plotNoisyFishing, "ChapterDynamics/noisyfishing.pdf", width=singlewidth, height=height)
 }

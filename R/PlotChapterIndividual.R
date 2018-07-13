@@ -120,7 +120,7 @@ plotKvsLinf <- function()
     ylab(TeX("von Bertalanffy coefficient, $\\textit{K}$ (1/yr)"))
   fig <- loglog(fig, ylim=c(0.03, 3))
   
-  ggsave("Chapter3/KvsLinf.pdf",width=singlewidth,height=singlewidth)
+  ggsave("ChapterIndividual/KvsLinf.pdf",width=singlewidth,height=singlewidth)
   fig
 }
 
@@ -154,7 +154,7 @@ plotA <- function()
     labs(colour="",shape="")
   fig <- loglog(fig)  
   
-  ggsave("Chapter3/A.pdf", width=singlewidth, height=height)
+  ggsave("ChapterIndividual/A.pdf", width=singlewidth, height=height)
   fig
 }
 
@@ -277,7 +277,7 @@ plotR <- function()
     ylab(TeX("Repro. output  ($g^{-0.25}$)"))
   
   fig <- loglog(fig)
-  ggsave("Chapter3/R.pdf", width=singlewidth, height=height)
+  ggsave("ChapterIndividual/R.pdf", width=singlewidth, height=height)
   fig
 }  
 
@@ -343,7 +343,7 @@ plotGrowth <- function()
     scale_y_continuous(oob=rescale_none)
   fig <- mytheme(fig)
   
-  ggsave("Chapter3/Growth.pdf",width=width, height=height, units="cm")
+  ggsave("ChapterIndividual/Growth.pdf",width=width, height=height, units="cm")
   fig
 }
 
@@ -404,7 +404,7 @@ plotBudget <- function()
   # fig2 <- semilogx(fig2)
   # fig2
   
-  ggsave("Chapter3/budget.pdf",width=singlewidth, height=height)
+  ggsave("ChapterIndividual/budget.pdf",width=singlewidth, height=height)
   fig
 }
 
@@ -430,12 +430,12 @@ plotTestGrowth <- function(K, Linf)
 }
 
 
-plotAllChapter3 <- function()
+plotAllChapterIndividual <- function()
 {
-  pdfplot("Chapter3/vonB2.pdf", plotSketch_and_vonB, width=doublewidth, height=height)
+  pdfplot("ChapterIndividual/vonB2.pdf", plotSketch_and_vonB, width=doublewidth, height=height)
   plotKvsLinf()
   plotA()
-  pdfplot("Chapter3/maturity.pdf", plotMaturity, width=doublewidth, height=height)
+  pdfplot("ChapterIndividual/maturity.pdf", plotMaturity, width=doublewidth, height=height)
   plotR()
   plotGrowth()
   plotBudget()

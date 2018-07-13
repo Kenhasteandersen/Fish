@@ -258,14 +258,14 @@ plotSelectionSelectivity <- function() {
 }
 
 
-plotAllChapter6 <- function() {
-  pdfplot(FUN=plotConover, "Chapter6/Conover.pdf", width=doublewidth, height=height)
+plotAllChapterFIE <- function() {
+  pdfplot(FUN=plotConover, "ChapterFIE/Conover.pdf", width=doublewidth, height=height)
 
-  pdfplot(FUN=plotQG, "Chapter6/QG.pdf", width=1.25*singlewidth, height=1.25*height)
+  pdfplot(FUN=plotQG, "ChapterFIE/QG.pdf", width=1.25*singlewidth, height=1.25*height)
 
-  pdfplot(FUN=plotSelectionResponse, "Chapter6/SelectionResponse.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotSelectionResponse, "ChapterFIE/SelectionResponse.pdf", width=doublewidth, height=height)
 
-  pdfplot(FUN=plotSelectionResponsevsSpawner, "Chapter6/SpawnerFishing.pdf", height=1.2*height)
+  pdfplot(FUN=plotSelectionResponsevsSpawner, "ChapterFIE/SpawnerFishing.pdf", height=1.2*height)
   
-  pdfplot("Chapter6/SelectionSelectivity.pdf", plotSelectionSelectivity, height=height, width=doublewidth)
+  pdfplot("ChapterFIE/SelectionSelectivity.pdf", plotSelectionSelectivity, height=height, width=doublewidth)
 }
