@@ -439,7 +439,7 @@ plotSpatialPlaice = function() {
     coord_map(xlim = xL, ylim = yL)
   p3plaice
   
-  ggsave("Chapter7b/SpatialPlaice.pdf",
+  ggsave("ChapterConsumerResource/SpatialPlaice.pdf",
          grid.arrange(p1plaice, p2plaice,p3plaice ,ncol=3),
          width=doublewidth, height=height)
 }
@@ -614,18 +614,18 @@ compareModels <- function(W=1000) {
   lines(F, YC/max(YC), lty=dashed)
 }
 
-plotAllChapter7b = function() {
-  pdfplot("Chapter7b/GrowthF0.pdf", plotGrowthF0, width=singlewidth, height=height)
-  pdfplot("Chapter7b/Spectra_ConsumerResourceModel.pdf", 
+plotAllChapterConsumerResource = function() {
+  pdfplot("ChapterConsumerResource/GrowthF0.pdf", plotGrowthF0, width=singlewidth, height=height)
+  pdfplot("ChapterConsumerResource/Spectra_ConsumerResourceModel.pdf", 
           plotSpectra_ConsumerResourceModel, width=doublewidth, height = 2*height)
-  pdfplot("Chapter7b/ConsumerResourceVariation.pdf",
+  pdfplot("ChapterConsumerResource/ConsumerResourceVariation.pdf",
           plotConsumerResourceVariation2, width=doublewidth,
           height=height)
-  pdfplot("Chapter7b/FishingvsWf.pdf",
+  pdfplot("ChapterConsumerResource/FishingvsWf.pdf",
           plotFishingvsWf, width=doublewidth, height=height)
-  pdfplot("Chapter7b/OptimalEtaF.pdf",
+  pdfplot("ChapterConsumerResource/OptimalEtaF.pdf",
           plotOptimalEtaF, width=doublewidth, height=height)
-  pdfplot("Chapter7b/PlaiceGrowth.pdf",
+  pdfplot("ChapterConsumerResource/PlaiceGrowth.pdf",
           plotPlaiceGrowth, width=doublewidth, height=height)
   plotSpatialPlaice()
 }
