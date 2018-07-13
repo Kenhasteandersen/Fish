@@ -191,9 +191,9 @@ plotTraitsFishbase <- function() {
   loglogpanel(xlim=c(4,500), ylim=c(0.5, 150), bExponential=FALSE, new=TRUE)
 }
 
-plotAllChapter11 <- function() {
-  #pdfplot(FUN=plotTraits, "Chapter11/traits.pdf", width=doublewidth, height=2*height)
-  pdfplot(FUN=plotTraitsFishbase, "Chapter11/traits.pdf", width=doublewidth, height=2*height)
+plotAllChapterTraits <- function() {
+  #pdfplot(FUN=plotTraits, "ChapterTraits/traits.pdf", width=doublewidth, height=2*height)
+  pdfplot(FUN=plotTraitsFishbase, "ChapterTraits/traits.pdf", width=doublewidth, height=2*height)
   
 }
   
