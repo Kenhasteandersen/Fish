@@ -172,9 +172,9 @@ plotEggSize <- function() {
   cat('Elasmobranch offspring mass ratio: ', coef,'\n')
   
   # Pictograms:
-  addEpsPicture('Chapter10/Fish_silhouette_licensed_from_123rs.eps',
+  addEpsPicture('ChapterSharks_vs_teleosts/Fish_silhouette_licensed_from_123rs.eps',
     x=0.87, y=0.47, width=0.2)
-  addEpsPicture('Chapter10/Shark_silhouette_licensed_from_123rf.eps',
+  addEpsPicture('ChapterSharks_vs_teleosts/Shark_silhouette_licensed_from_123rf.eps',
                 x=0.54, y=0.86, width=0.2)
 }
 
@@ -259,8 +259,8 @@ plotComparison2 <- function() {
 }
 
 
-plotAllChapter10 <- function() {
-  pdfplot(FUN=plotComparison, "Chapter10/comparison.pdf", width=doublewidth, height=height)
-  pdfplot(FUN=plotEggSize, "Chapter10/eggsize.pdf", width=1.5*singlewidth, height=1.5*height)
-  pdfplot(FUN=plotComparison2, "Chapter10/comparison2.pdf", width=doublewidth, height=height)
+plotAllChapterSharks_vs_teleosts <- function() {
+  pdfplot(FUN=plotComparison, "ChapterSharks_vs_teleosts/comparison.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotEggSize, "ChapterSharks_vs_teleosts/eggsize.pdf", width=1.5*singlewidth, height=1.5*height)
+  pdfplot(FUN=plotComparison2, "ChapterSharks_vs_teleosts/comparison2.pdf", width=doublewidth, height=height)
 }
