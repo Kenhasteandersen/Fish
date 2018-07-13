@@ -361,7 +361,7 @@ plotDynamicCommunity <- function() {
   
   grid <- plot_grid(fig,figF,figM,figR, ncol=1, align="v",
                     rel_heights = c(2,1,1.3,1.3))
-  ggsave("Chapter8/DynamicCommunity.pdf", grid, height=3*height, width=singlewidth)  
+  ggsave("ChapterCommunity/DynamicCommunity.pdf", grid, height=3*height, width=singlewidth)  
 }
 
 #
@@ -375,11 +375,11 @@ plotDD <- function() {
 }
 
 
-plotAllChapter8 <- function() 
+plotAllChapterCommunity <- function() 
 {
-  pdfplot("Chapter8/spectra.pdf", plotSpectra, width=doublewidth, height = height)
-  pdfplot("Chapter8/ExtendedSheldon.pdf", plotExtendedSheldon, width=singlewidth, height=height)
-  pdfplot("Chapter8/RmaxSensitivity.pdf", plotRmaxSensitivity, width=1.5*singlewidth, height=height)
+  pdfplot("ChapterCommunity/spectra.pdf", plotSpectra, width=doublewidth, height = height)
+  pdfplot("ChapterCommunity/ExtendedSheldon.pdf", plotExtendedSheldon, width=singlewidth, height=height)
+  pdfplot("ChapterCommunity/RmaxSensitivity.pdf", plotRmaxSensitivity, width=1.5*singlewidth, height=height)
 
   plotDynamicCommunity()
   
