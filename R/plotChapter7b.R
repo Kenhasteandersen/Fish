@@ -322,9 +322,126 @@ plotOptimalEtaF <- function(W=1000, nPoints = 10) {
   lines(W, etaFoptW[1,], lty=dotted)
   lines(W, etaFoptW[2,], lwd=2)
   lines(W, etaFoptW[3,], lwd=2, lty=dashed)
+}
+
+plotSpatialPlaice = function() {
+  library('ggplot2')
+  library(rworldmap)
+  library(rworldxtra)
+  library(grid)
+  library(gridExtra)
+  library(rgdal)
+  library(mapplots)
+  library(scales)
+  library(mapproj)
   
   
+  wmap <- readOGR(dsn=paste('Data/shapefiles', sep =''), layer="ne_110m_land")
+  wmap_df <- fortify(wmap)
   
+  wmap_df <- fortify(wmap)
+  
+  IcesMap <- readOGR(dsn=paste('Data/shapefiles', sep =''), 
+                     layer = "ices_rectangles")
+  
+  Icesmap_df <- fortify(IcesMap)
+  
+  newmap <- getMap(resolution = 'low')
+  newmap_df <- fortify(newmap)
+  
+  xL <- c(-6,12)
+  yL <- c(50,60)
+  
+  # Get data 
+  # Plot age 0 
+  theme_opts <- list(theme(panel.grid.minor = element_blank(),
+                           panel.grid.major = element_blank(),
+                           panel.background = element_rect(fill = 'white'),
+                           plot.background = element_rect(fill="white"),
+                           panel.border = element_blank(),
+                           plot.title = element_text(size=12)))
+  
+  df <- read.csv('Data/MapData_NS_Demersals.csv')
+  pop_n <- 0.9
+  # Subset plaice
+  plaice <- df[which(df$Species == "Pleuronectes platessa"),]
+  # Lat/long for plaice
+  coords <- ices.rect(plaice$Subarea)
+  plaice <- data.frame(plaice, coords)
+  
+  # Read the mean weights 
+  weights <- read.csv('Data/NS_IBTS_MeanWeights.csv', sep = ',')
+  head(weights)
+  
+  plaice_weight <- weights[weights$Species == "Pleuronectes platessa",]
+  plaice$weight <-  0.0093*(plaice$LngtClas/10)^3.03
+  
+  plaice1 <- plaice[which(plaice$weight < 30),] # Only less than 30g
+  
+  # Normalize Cpue for plotting
+  plaice1$lCPUE = (plaice1$CPUE_number_per_hour)/(max(plaice1$CPUE_number_per_hour))
+  
+  plaice1 <- plaice1[with(plaice1, order(lCPUE)),]
+  Idx <- which.min((pop_n*sum(plaice1$CPUE_number_per_hour)-cumsum(sort(plaice1$CPUE_number_per_hour, decreasing = F)))^2)
+  
+  plaice1_plot <- plaice1[1:Idx,]
+  
+  p1plaice <- ggplot(data =plaice1_plot,aes(x =lon,y=lat))+
+    geom_tile(aes(fill=lCPUE))+
+    geom_polygon(data=newmap_df, aes(x =long,y=lat,group=group), fill = 'gray', color = 'black') + 
+    scale_fill_continuous(low = "gray90",high = "gray0", guide = FALSE,limits = c(0,1))+
+    theme_opts+
+    #theme(legend.position="topright")+
+    xlab('Longitude')+theme(axis.text.y = element_blank())+ylab('Latitude')+
+    ggtitle('Plaice < 30 g')+
+    coord_map(xlim = xL, ylim = yL)
+  p1plaice
+  
+  # For larger plaice
+  plaice2 <- plaice[which(plaice$weight < 100),] 
+  plaice2$lCPUE = (plaice2$CPUE_number_per_hour)/(max(plaice2$CPUE_number_per_hour))
+  plaice2 <- plaice2[with(plaice2, order(lCPUE)),]
+  Idx <- which.min((pop_n*sum(plaice2$CPUE_number_per_hour)-cumsum(sort(plaice2$CPUE_number_per_hour, decreasing = F)))^2)
+  
+  plaice2_plot <- plaice2[1:Idx,]
+  
+  p2plaice <- ggplot(data =plaice2_plot,aes(x =lon,y=lat))+
+    geom_tile(aes(fill=lCPUE))+
+    geom_polygon(data=newmap_df, aes(x =long,y=lat,group=group), fill = 'gray', color = 'black') + 
+    scale_fill_continuous(low = "gray90",high = "gray0", guide = FALSE,limits = c(0,1))+
+    theme_opts+
+    #theme(legend.position="none")+
+    ggtitle('Plaice < 100 g')+
+    xlab('Longitude')+
+    ylab('')+theme(axis.text.y = element_blank())+
+    coord_map(xlim = xL, ylim = yL)
+  
+  p2plaice
+  
+  # Only the largest plaice
+  plaice3 <- plaice[which(plaice$weight > 200),]
+  plaice3$lCPUE = (plaice3$CPUE_number_per_hour)/(max(plaice3$CPUE_number_per_hour))
+  plaice3 <- plaice3[with(plaice3, order(lCPUE)),]
+  Idx <- which.min((pop_n*sum(plaice3$CPUE_number_per_hour)-cumsum(sort(plaice3$CPUE_number_per_hour, decreasing = F)))^2)
+  
+  plaice3_plot <- plaice3[1:Idx,]
+  
+  
+  p3plaice <- ggplot(data =plaice3_plot,aes(x =lon,y=lat))+
+    # stat_contour(geom="polygon", aes(fill=..level..))+
+    geom_tile(aes(fill=lCPUE))+
+    geom_polygon(data=newmap_df, aes(x =long,y=lat, group=group), fill = 'gray', color = 'black') + 
+    scale_fill_continuous(low = "gray90",high = "gray0", guide = FALSE,limits = c(0,1))+
+    theme_opts+
+    #theme(legend.position="none")+
+    xlab('Longitude')+ylab('')+theme(axis.text.y = element_blank())+
+    ggtitle('Plaice > 200 g')+
+    coord_map(xlim = xL, ylim = yL)
+  p3plaice
+  
+  ggsave("Chapter7b/SpatialPlaice.pdf",
+         grid.arrange(p1plaice, p2plaice,p3plaice ,ncol=3),
+         width=doublewidth, height=height)
 }
 
 plotConsumerResourceVariation <- function(W=1000) {
@@ -510,4 +627,5 @@ plotAllChapter7b = function() {
           plotOptimalEtaF, width=doublewidth, height=height)
   pdfplot("Chapter7b/PlaiceGrowth.pdf",
           plotPlaiceGrowth, width=doublewidth, height=height)
+  plotSpatialPlaice()
 }

@@ -31,6 +31,7 @@ squares <- 15
 stdgrey <- grey(0.4)
 darkgrey <- grey(0.15)
 lightgrey <- grey(0.7)
+black <- grey(0)
 axis.lwd <- 0.35
 
 defaultplot <- function(
@@ -107,10 +108,12 @@ test <- function() {
 
 defaultpanel <- function(xlim, ylim, 
                          xlab='', ylab='', 
-                         xaxis=TRUE, yaxis=TRUE, label=FALSE, new=FALSE) {
+                         xaxis=TRUE, yaxis=TRUE, label=FALSE, new=FALSE,
+                         bty="o") {
   plot(1, type='n', 
        ylim=range(ylim[!is.na(ylim)]), 
-       xlim=range(xlim[!is.na(xlim)]), axes=FALSE, xlab='', ylab='', par(new=new))
+       xlim=range(xlim[!is.na(xlim)]), axes=FALSE, xlab='', ylab='', par(new=new),
+       bty=bty)
   mtext(side=bottom, line=1, TeX(xlab), cex=par()$cex)
   mtext(side=left, line=1, TeX(ylab), cex=par()$cex)
   if (label) 
@@ -119,7 +122,8 @@ defaultpanel <- function(xlim, ylim,
     axis(bottom, labels=xaxis, cex.axis=par()$cex.axis, lwd=axis.lwd, lwd.ticks=axis.lwd)
   if (yaxis)
     axis(left, labels=yaxis, cex.axis=par()$cex.axis, lwd=axis.lwd, lwd.ticks=axis.lwd)
-  box(lwd=axis.lwd)
+  if (bty == "o")
+    box(lwd=axis.lwd)
 
 }
 
@@ -216,11 +220,11 @@ makepanellabel <- function(line=-1.1) {
   assign("iPlot", iPlot+1, envir = .GlobalEnv)
 }
 
-hline <- function(y=0, lty='dotted') {
+hline <- function(y=0, lty='dotted', lwd=1) {
   if (par("xlog"))
-    lines(x=10^par("usr")[1:2], y=y*c(1,1), lty=lty)
+    lines(x=10^par("usr")[1:2], y=y*c(1,1), lty=lty, lwd=lwd)
   else
-    lines(x=par("usr")[1:2], y=y*c(1,1), lty=lty)
+    lines(x=par("usr")[1:2], y=y*c(1,1), lty=lty, lwd=lwd)
 }
 
 vline <- function(x=0, lty='dotted', col="black") {

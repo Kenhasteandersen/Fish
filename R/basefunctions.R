@@ -1,3 +1,5 @@
+#library(checkpoint)
+#checkpoint("2018-07-07")
 #
 # Basic functions for single-population calculations, used throughout all chapters
 #
