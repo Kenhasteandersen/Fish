@@ -7,7 +7,7 @@ plotOptimalForaging = function() {
   
   #par(xaxp=c(90,190,5))
   defaultpanel(xlim=c(0,2), ylim=c(0,1), 
-               xlab="Encountered food rel. to C_{max}", ylab="Time in arena $\\tau^*")##), xaxis = TRUE, yaxis=TRUE)
+               xlab="Encountered food relative to \\textit{C}_{max}", ylab="Time in arena $\\tau^*")##), xaxis = TRUE, yaxis=TRUE)
   x = seq(0,4, length.out = 1000)
   tau = pmin(1, 1/x*sqrt(p$fc)/(1-sqrt(p$fc)))
   lines(x, tau, lwd=2)
