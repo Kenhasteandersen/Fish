@@ -11,6 +11,8 @@ require(cowplot)
 require(gam)
 require(numDeriv)
 
+dir.create("ChapterCommunity")
+
 panelSMSspecies <- function(year=1990) {
   SMS <- read.csv("Data/SMS 2008.csv",sep=";")
   # Make a continuous time variable:

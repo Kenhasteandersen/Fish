@@ -5,6 +5,8 @@ source("R/basetools.R")
 source("R/baseparameters.R")
 source("R/basefunctions.R")
 
+dir.create("ChapterIndividual")
+
 getGrowthParameters <- function()
 {
   data <- read.csv("Data/fecundpruned.csv",header=TRUE,sep=",")

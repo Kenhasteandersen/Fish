@@ -7,6 +7,8 @@ source("R/basefunctions.R")
 source("R/baseparameters.R")
 source("R/community.R")
 
+dir.create("ChapterCommunityFishing")
+
 plotDaan <- function()
 {
   dat <- read.csv("Data/Daan.dat", sep=",", header=FALSE)

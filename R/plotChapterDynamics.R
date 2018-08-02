@@ -4,6 +4,8 @@ source("R/baseparameters.R")
 source("R/community.R")
 require(jpeg)
 
+dir.create("ChapterDynamics")
+
 calcEigenvalue <- function(p) {
   W <- p$W
   n <- p$n

@@ -2,6 +2,8 @@ source("R/basetools.R")
 source("R/basefunctions.R")
 source("R/baseparameters.R")
 
+dir.create("ChapterTraits")
+
 getOlssonData <- function() {
   data <- read.csv("Data/fecundpruned.csv",header=TRUE,sep=",")
   data$Winf <- data$aW * data$Linf^data$bW

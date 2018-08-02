@@ -5,6 +5,8 @@ source("R/basetools.R")
 source("R/basefunctions.R")
 source("R/baseparameters.R")
 
+dir.create("ChapterFishing")
+
 plotSelectivity <- function()
 {
   getData <- function(filename)

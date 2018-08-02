@@ -3,6 +3,8 @@ source("R/basefunctions.R")
 source("R/baseparameters.R")
 source("R/community.R")
 
+dir.create("ChapterConsumerResource")
+
 plotGrowthF0 <- function() {
   require(deSolve)
   

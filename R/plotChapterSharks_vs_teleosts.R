@@ -3,6 +3,8 @@ source("R/basefunctions.R")
 source("R/baseparameters.R")
 source("R/community.R")
 
+dir.create("ChapterSharks_vs_teleosts")
+
 getOlssonData <- function() {
   data <- read.csv("Data/fecundpruned.csv",header=TRUE,sep=",")
   data$Winf <- data$aW * data$Linf^data$bW

@@ -1,5 +1,7 @@
 source('R/QuantitativeGenetics.R')
 
+dir.create("ChapterFIE")
+
 plotConover <- function() {
   defaultplot(mfcol=c(1,2))
   lty = c(1,1,3,3,2,2)

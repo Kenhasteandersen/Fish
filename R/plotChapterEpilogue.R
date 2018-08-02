@@ -1,3 +1,5 @@
+dir.create("ChapterEpilogue")
+
 plotOptimalForaging = function() {
   p = baseparameters()
   defaultplothorizontal(nPanels = 2)

@@ -5,6 +5,8 @@ source("R/basetools.R")
 source("R/basefunctions.R")
 source("R/baseparameters.R")
 
+dir.create("ChapterDemography")
+
 # 
 # Plots
 # 
@@ -339,7 +341,7 @@ plot_acrit <- function()
     annotate("text", x=20, y=0.75, label="R[0] < 1", parse=TRUE, colour="white") +
     annotate("text", x=20, y=0.1, label="R[0] > 1", parse=TRUE, colour="black") +
     #scale_y_continuous(limits = c(0, 1)) +
-    xlab(TeX("Asymptotic size, $\\textit{W}_\\infty$ (g)")) +
+    xlab(TeX("Asymptotic size, $\\textit{W}_{\\infty}$ (g)")) +
     ylab(TeX("Phys. mortality, $\\textit{a}$"))
   fig <- fig +
     scale_x_log10(breaks = bks, #10^seq(floor(xrange[1]), floor(xrange[2]), by=1), #trans_breaks("log10", function(x) 10^x),

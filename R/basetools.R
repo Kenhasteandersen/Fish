@@ -12,6 +12,11 @@ singlewidth <- 8/2.54 # panel width in cm
 doublewidth <- 13/2.54
 height <- 8/1.6/2.54 + 2.5*0.138889
 
+if(.Platform$OS.type=="windows") {
+  quartz<-function(width, height) 
+    windows(width=width, height=height)
+}
+
 # Base R plotting tools =====================================================
 
 bottom <- 1
