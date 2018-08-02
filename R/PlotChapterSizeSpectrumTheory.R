@@ -7,6 +7,8 @@ source("R/basefunctions.R")
 source("R/baseparameters.R")
 source("R/PlotChapterIndividual.R")
 
+dir.create("ChapterSizeSpectrumTheory")
+
 plotSheldon <- function() {
   data <- read.csv("Data/sheldon.dat")
   data <- 10^data
