@@ -424,12 +424,12 @@ plotDynamics <- function() {
     
     if (i==1) {
       mtext('     SSB/max(SSB)', side=left, line=1.5, adj=0)
-      img<-readJPEG("ChapterDynamics/Sardinops_sagax open.jpg")
+      img<-readJPEG("Data/Sardinops_sagax open.jpg")
       rasterImage(img, 15, 0.02, 18, 0.05)
     }
     else {
       mtext(TeX('  R/$R_{max};   $'), side=left, line=1.5, col=stdgrey, adj=1)
-      img <- readJPEG("ChapterDynamics/Atlantic_cod open.jpg")
+      img <- readJPEG("Data/Atlantic_cod open.jpg")
       rasterImage(img, 11, 0.02, 19, 0.25)
     }
     
