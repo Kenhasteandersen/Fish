@@ -185,7 +185,7 @@ plotFishingvsWf <- function(W=1000, n=20) {
     Y[1,,] = panelFishingvsWf(p, F=F, etaF=etaF)
     
     # Emergent functional response without cannibalism:
-    p = paramConsumerResourcemodell(W=W, facRmax=1e8)
+    p = paramConsumerResourcemodel(W=W, facRmax=1e8)
     p$thetaFish = 0
     Y[2,,] = panelFishingvsWf(p, F=F, etaF=etaF)
     
