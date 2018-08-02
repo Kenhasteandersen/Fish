@@ -5,7 +5,7 @@
 source("R/basetools.R")
 source("R/basefunctions.R")
 source("R/baseparameters.R")
-source("R/PlotChapter3.R")
+source("R/PlotChapterIndividual.R")
 
 plotSheldon <- function() {
   data <- read.csv("Data/sheldon.dat")
