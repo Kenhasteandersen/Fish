@@ -174,9 +174,9 @@ plotEggSize <- function() {
   cat('Elasmobranch offspring mass ratio: ', coef,'\n')
   
   # Pictograms:
-  addEpsPicture('ChapterSharks_vs_teleosts/Fish_silhouette_licensed_from_123rs.eps',
+  addEpsPicture('Data/Fish_silhouette_licensed_from_123rs.eps',
     x=0.87, y=0.47, width=0.2)
-  addEpsPicture('ChapterSharks_vs_teleosts/Shark_silhouette_licensed_from_123rf.eps',
+  addEpsPicture('Data/Shark_silhouette_licensed_from_123rf.eps',
                 x=0.54, y=0.86, width=0.2)
 }
 
