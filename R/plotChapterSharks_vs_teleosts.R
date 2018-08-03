@@ -174,10 +174,12 @@ plotEggSize <- function() {
   cat('Elasmobranch offspring mass ratio: ', coef,'\n')
   
   # Pictograms:
-  addEpsPicture('Data/Fish_silhouette_licensed_from_123rs.eps',
-    x=0.87, y=0.47, width=0.2)
-  addEpsPicture('Data/Shark_silhouette_licensed_from_123rf.eps',
-                x=0.54, y=0.86, width=0.2)
+  if(.Platform$OS.type!="windows") {
+    addEpsPicture('Data/Fish_silhouette_licensed_from_123rs.eps',
+                  x=0.87, y=0.47, width=0.2)
+    addEpsPicture('Data/Shark_silhouette_licensed_from_123rf.eps',
+                  x=0.54, y=0.86, width=0.2)
+  }
 }
 
 panelGrowthRates <- function() {
@@ -247,7 +249,7 @@ panelSharkRefpoints <- function() {
   semilogxpanel(xlim=W, ylim=c(0.01, 1),
                 xlab="Asymptotic size (g)",
                 ylab="Fishing mortality (yr^{-1})")
-  points(weight(dat$L...), dat$FBRP, pch=dots)
+  points(weight(dat$Linf), dat$FBRP, pch=dots)
   lines(W, Fmsy, lty=dashed, lwd=2)
   #lines(W, Fcrash, lty=dashed, lwd=2, col="grey")
   lines(Wshark, FmsyShark, lwd=3)
