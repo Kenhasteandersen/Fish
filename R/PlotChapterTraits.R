@@ -93,9 +93,9 @@ plotTraitsFishbase <- function() {
   #
   # Download fishbase
   #
+  require(rfishbase)
+  require(taxize)
   if (bRecalcExpensiveFunctions) {
-    require(rfishbase)
-    require(taxize)
     fish_list <- species_list()
     flatfish_list <- species_list(Order="Pleuronectiformes")
     elasmobranch_list <- species_list(Class="Elasmobranchii")
@@ -104,7 +104,8 @@ plotTraitsFishbase <- function() {
     fish <- species(fish_list)
     growth <- popgrowth(fish_list)
     
-    save(fish_list, flatfish_list, clupeid_list, elasmobranch_list, acti_list, fish, growth, 
+    save(
+         fish_list, flatfish_list, clupeid_list, elasmobranch_list, acti_list, fish, growth, 
          file='Data/fishbasedata.Rdata')
   }
   #
