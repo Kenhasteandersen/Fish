@@ -567,9 +567,10 @@ plotPredPrey <- function() {
   #   annotation_logticks(long=unit(1,"mm"),mid=unit(0,"cm"), short=unit(0,"cm")) + # l = left, b = bottom etc) +
   #   coord_fixed(ratio=1)
   
-  fig
   
   ggsave("ChapterSizeSpectrumTheory/PredPrey.pdf", width=singlewidth, height=singlewidth)
+
+  fig
 }
 
 plotCalculations <- function() {

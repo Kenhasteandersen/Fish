@@ -106,8 +106,12 @@ plotKvsLinf <- function()
   # fit
   fit <- lm(log(K) ~ log(L), data=dat)
   tmp <- data.frame(x=dat$L, y=exp(predict(fit)))
+  cat('Fit of K: C = ', exp(fit$coefficients[1]), 
+      ' and exponent ', fit$coefficients[2], "\n")
+  
   # fit with exponent -0.75:
   C <- exp(mean(log(dat$K * dat$L^0.75)))
+  cat('K fitted wit n=0.75: ', C, "\n")
   
   # fit with exponent -1:
   C2 <- exp(mean(log(dat$K * dat$L)))
@@ -175,7 +179,7 @@ panelEtam <- function()
   levels(data$Phylum) <- c("Elasmobranchs", "Teleosts")
   
   loglogpanel(xlim=data$Winf, ylim=c(0.01,2),
-              xlab="Asymptotic weight $\\textit{W}_\\infty$ (g)", 
+              xlab="Asymptotic weight $\\textit{W}_{\\infty}$ (g)", 
               ylab="Rel. maturation size, $\\textit{\\eta}_\\textit{m}$",
               label=TRUE)
   ixElasmo = data$Phylum=="Elasmobranchs"
@@ -391,8 +395,8 @@ plotBudget <- function()
     geom_ribbon(data=dat, 
                 aes(x=w, ymax=(A*w^n-psi*k*w)/maxrate, ymin=0.01/maxrate), 
                 fill=grey(0.2)) +
-    geom_line(data=dat, aes(x=w, y=(A*w^n-(1-epsEgg)*psi*k*w)/maxrate), 
-              linetype="dashed", size=thick) +
+    #geom_line(data=dat, aes(x=w, y=(A*w^n-(1-epsEgg)*psi*k*w)/maxrate), 
+    #          linetype="dashed", size=thick) +
     geom_vline(xintercept = etaM, linetype="dotted", size=thin) +
     xlab(TeX("Relative body weight $(\\textit{w}/\\textit{W}_{\\infty})$")) + 
     ylab("Normalized rates")

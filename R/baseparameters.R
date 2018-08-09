@@ -31,7 +31,8 @@ baseparameters <- function(W=NULL)
   p$ElasmobranchEggMassRatio <- 0.0044
   
   # Mortality:
-  p$a <- 0.425 # 0.34
+  
+  p$a <- p$beta^(2*p$n-p$q-1) * exp((2*p$n-p$q-1)*(p$q-1)*p$sigma^2/2) * p$f0/(p$epsA*(p$f0-p$fc)) #0.425 # 0.34
   p$aMKconstant <- 1/4.83   # Relation between a and M/K
   
   # Fishing
