@@ -103,9 +103,10 @@ plotQG <- function() {
 }
 
 
-plotSelectionResponse <- function(p=baseparamQG()) {
+plotSelectionResponse <- function(p=baseparamQG(), 
+                                  ylim=c(-0.0025, 0.0065)) {
   defaultplothorizontal(mfcol=c(1,2))
-  ylim <- c(-0.002, 0.0065)
+  
   #
   # First panel, R vs. F
   #
@@ -139,6 +140,12 @@ plotSelectionResponse <- function(p=baseparamQG()) {
   lines(W, S$dwmdt, lwd=2)
   lines(W, S$dAdt, lwd=2, lty='dotdash')
   lines(W, S$dkrdt, lwd=2, lty='dashed')
+}
+
+plotSelectionResponseLarge <- function() {
+  p = baseparamQG()
+  p$etaF = 0.5
+  plotSelectionResponse(p)
 }
 
 
@@ -266,7 +273,9 @@ plotAllChapterFIE <- function() {
   pdfplot(FUN=plotQG, "ChapterFIE/QG.pdf", width=1.25*singlewidth, height=1.25*height)
 
   pdfplot(FUN=plotSelectionResponse, "ChapterFIE/SelectionResponse.pdf", width=doublewidth, height=height)
-
+  
+  pdfplot(FUN=plotSelectionResponseLarge, "ChapterFIE/SelectionResponseLarge.pdf", width=doublewidth, height=height)
+  
   pdfplot(FUN=plotSelectionResponsevsSpawner, "ChapterFIE/SpawnerFishing.pdf", height=1.2*height)
   
   pdfplot("ChapterFIE/SelectionSelectivity.pdf", plotSelectionSelectivity, height=height, width=doublewidth)
