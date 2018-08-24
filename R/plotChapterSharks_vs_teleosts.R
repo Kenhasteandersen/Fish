@@ -72,7 +72,7 @@ plotComparison <- function() {
   #  R*w^0.25
   # -----
   boxplot(log10(R*Winf^0.25)~Phylum, data=data, notch=TRUE, 
-          ylab=TeX("Repro. $log_{10}(\\textit{R}_{egg} W_{\\infty}$$^{0.25})$ $(yr^{-1})"),
+          ylab=TeX("Repro. $log_{10}(\\textit{R}_{egg} \\textit{W}_{\\infty}$$^{0.25})$ $(yr^{-1})"),
           names=c("Teleost","Elas."), cex.lab=0.9)
   makepanellabel()
   # ----
@@ -91,7 +91,8 @@ plotComparison <- function() {
   adat <- rbind(data.frame(a=A$a, Phylum=A$Phylum),
                 data.frame(a=0.22*(data$M/data$K)[ixElas], Phylum=data$Phylum[ixElas]))
   
-  boxplot(a~Phylum, data=adat, ylab=TeX("Physiological mortality, $\\textit{a}$"),
+  boxplot(a~Phylum, data=adat, notch=TRUE,
+          ylab=TeX("Physiological mortality, $\\textit{a}$"),
           names=c("Teleost","Elas."), cex.lab=0.9)
   makepanellabel()
 }
@@ -199,11 +200,11 @@ panelGrowthRates <- function() {
                 xlab="Asymptotic size (g)",
                 ylab="Population growth rate (yr$^{-1}$)")
   lines(W, calc_rana1(W, p), lty=dashed, lwd=3) # Teleosts
-  lines(Wshark, calcr(Wshark, 0.5*p$epsEgg, p$ElasmobranchEggMassRatio*Wshark), lwd=1)
-  lines(Wshark, calcr(Wshark, 0.2*p$epsEgg, p$ElasmobranchEggMassRatio*Wshark), lwd=3)
+  lines(Wshark, calcr(Wshark, 1*p$epsEgg, p$ElasmobranchEggMassRatio*Wshark), lwd=1)
+  lines(Wshark, calcr(Wshark, p$epsR_Elasmobranch*p$epsEgg, p$ElasmobranchEggMassRatio*Wshark), lwd=3)
   lines(Wshark, calcr(Wshark, p$epsR*p$epsEgg, p$ElasmobranchEggMassRatio*Wshark), lwd=1)
-  lines(W, calcr(W, 0.5*p$epsEgg, p$ElasmobranchEggMassRatio*W), lwd=1, lty=dotted)
-  lines(W, calcr(W, p$epsEgg*0.2, p$ElasmobranchEggMassRatio*W), lwd=1, lty=dotted)
+  lines(W, calcr(W, 1*p$epsEgg, p$ElasmobranchEggMassRatio*W), lwd=1, lty=dotted)
+  lines(W, calcr(W, p$epsR_Elasmobranch*p$epsEgg, p$ElasmobranchEggMassRatio*W), lwd=1, lty=dotted)
   lines(W, calcr(W, p$epsEgg*p$epsR, p$ElasmobranchEggMassRatio*W), lwd=0.5, lty=dotted)
   #hline(0)
 }
@@ -216,7 +217,7 @@ panelSharkRefpoints <- function() {
   calcSharkRefpoint <- function(W) {
     pp <- p
     pp$w0 <- pp$ElasmobranchEggMassRatio*W
-    pp$epsR <- 0.2
+    pp$epsR <- pp$epsR_Elasmobranchs
     pp$W <- W
     return(calcRefpoints(pp))
   }

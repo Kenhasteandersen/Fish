@@ -62,10 +62,10 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   wrange = c(0.1,W)
   loglogpanel(xlim = wrange, 
               ylim=c(5, 1e6),
-              ylab = "Spectrum, \\textit{Nw^2/(N(w_0)w_0^2)} (g)",
+              ylab = "Spectrum, \\textit{Nw^2/(N(w_0)w_0^2)}",
               xlab = "Weight (g)", label=TRUE)
   # Resource:
-  # wR = r$resource$wR
+  wR = r$resource$wR
   # NR = r$resource$NR/r$N[r$nSave,1,1]*(wR/p$w0)^2
   # KR = p$KR * wR^(p$lambdaR)/r$N[r$nSave,1,1]*(wR/p$w0)^2
   # ribbon(wR, NR, KR)
@@ -73,8 +73,11 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   # lines(wR, KR, lwd=2, col=stdgrey, lty=dashed)
 
   w = r$fish$w
-  lines(w, r_std$N[r$nSave,1,]/r_std$N[r$nSave,1,1]*(w/p$w0)^2, lty=dashed, lwd=2)
-  lines(w, r$N[r$nSave,1,]/r$N[r$nSave,1,1]*(w/p$w0)^2, lwd=2)
+  Nstd = r_std$N[r$nSave,1,]/r_std$N[r$nSave,1,1]*(w/p$w0)^2
+  N = r$N[r$nSave,1,]/r$N[r$nSave,1,1]*(w/p$w0)^2
+  #ribbon(w, ymax=N, ymin=Nstd)
+  lines(w, Nstd, lty=dashed, lwd=2)
+  lines(w, N, lwd=2)
   
   legend("bottomright", 
          legend=c("Early-life density dep.", "Emergent density dep."), 
@@ -85,7 +88,7 @@ plotSpectra_ConsumerResourceModel <- function(W=1000) {
   #
   semilogxpanel(xlim = wrange, 
                 ylim=c(0,1),
-                ylab = "Feeding and loss",
+                ylab = "Loss and feeding",
                 xlab = "Weight (g)",
                 label = TRUE)
   # feeding
@@ -209,7 +212,7 @@ plotFishingvsWf <- function(W=1000, n=20) {
   par(oma=oma) 
   
   tightaxes()
-  semilogxpanel(xlim=etaF, ylim=F, ylab="Fishing mortality (yr$^{-1})")
+  semilogxpanel(xlim=etaF, ylim=F, ylab="Fishing mortality (yr$^{-1})", label=TRUE)
   polygon(c(p$etaM,1,1,p$etaM), c(0,0,1,1), col=lightgrey, border=NA)
   contour(x=etaF, y=F, z=Y[1,,],
           drawlabels=FALSE, frame.plot=FALSE, add=TRUE,
@@ -217,18 +220,18 @@ plotFishingvsWf <- function(W=1000, n=20) {
   semilogxpanel(xlim=etaF, ylim=F, ylab="Fishing mortality (yr$^{-1})", new=TRUE)
   mtext(side=top, line=0.5, "Early density dep.")
   
-  semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE,
+  semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE, label=TRUE,
                 xlab="Start of fishing relative to asymptotic size")
   polygon(c(p$etaM,1,1,p$etaM), c(0,0,1,1), col=lightgrey, border=NA)
   tightaxes()
   contour(x=etaF, y=F, z=Y[2,,],
           drawlabels=FALSE, frame.plot=FALSE, add=TRUE,
           levels=seq(0,1,length.out = 10), axes=FALSE)
-  semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE,
+  semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE, 
                 xlab="Start of fishing relative to asymptotic size", new=TRUE)
   mtext(side=top, line=0.5, "Competition")
   
-  semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE)
+  semilogxpanel(xlim=etaF, ylim=F, yaxis=FALSE, label=TRUE)
   polygon(c(p$etaM,1,1,p$etaM), c(0,0,1,1), col=lightgrey, border=NA)
   tightaxes()
   contour(x=etaF, y=F, z=Y[3,,],
@@ -532,7 +535,7 @@ plotConsumerResourceVariation2 <- function(W=1000) {
   #
   loglogpanel(xlim=w, ylim=c(1e-9,1e-1), 
               xlab="Weight (g)", ylab="Biomass spectrum",
-              label=TRUE)
+              label=TRUE, xaxs="i")
   lines(r$w, p$KR * w^(p$lambdaR+2), lwd=3, col=stdgrey)
   for (i in 1:length(facRmax)) {
     lines(w, B[i,])
@@ -549,7 +552,7 @@ plotConsumerResourceVariation2 <- function(W=1000) {
   #
   semilogxpanel(xlim=w, ylim = c(0,1),
                 xlab="Weight (g)", ylab="feeding and loss",
-                label=TRUE)
+                label=TRUE, xaxs="i")
   for (i in 1:length(facRmax))  {
     lines(w, f[i,], col=stdgrey)
     lines(w, loss[i,])
@@ -570,10 +573,12 @@ plotPlaiceGrowth = function() {
   # Cohorts
   #
   defaultpanel(xlim=c(1980,2016), ylim=c(5,45),
-               xlab="Year", "Length (cm)")
+               xlab="Year", "Length (cm)", xaxs="i")
+  #par(xaxs = "i")
   ribbon(x=plaice$Year, ymax=10*plaice$StockSize/max(plaice$StockSize)+5, ymin=plaice$StockSize*0)
   defaultpanel(xlim=c(1980,2016), ylim=c(5,45),
-               xlab="Year", "Length (cm)", new=TRUE)
+               xlab="Year", "Length (cm)", new=TRUE,xaxs="i")
+  #par(xaxs = "i")
   
   for (age in 0:6) {
     ix = (dat$AGE==age)
@@ -619,6 +624,8 @@ compareModels <- function(W=1000) {
 }
 
 plotAllChapterConsumerResource = function() {
+  pdfplot("ChapterConsumerResource/PlaiceGrowth.pdf",
+          plotPlaiceGrowth, width=doublewidth, height=height)
   pdfplot("ChapterConsumerResource/GrowthF0.pdf", plotGrowthF0, width=singlewidth, height=height)
   pdfplot("ChapterConsumerResource/Spectra_ConsumerResourceModel.pdf", 
           plotSpectra_ConsumerResourceModel, width=doublewidth, height = 2*height)
@@ -629,7 +636,5 @@ plotAllChapterConsumerResource = function() {
           plotFishingvsWf, width=doublewidth, height=height)
   pdfplot("ChapterConsumerResource/OptimalEtaF.pdf",
           plotOptimalEtaF, width=doublewidth, height=height)
-  pdfplot("ChapterConsumerResource/PlaiceGrowth.pdf",
-          plotPlaiceGrowth, width=doublewidth, height=height)
   plotSpatialPlaice()
 }

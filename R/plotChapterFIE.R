@@ -95,7 +95,7 @@ plotQG <- function() {
   lines(x=c(1,1), y=c(1,1.25), lty='dotted')
   lines(x=1.2*c(1,1), y=c(1,1.25), lty='dotted')
   arrows(x0=1, x1=1.2, y0=1.2, y1=1.2, lwd=2, length=0.1)
-  text(x=1.1, y=1.1, labels=TeX('$\\textit{S}_\\theta$'))
+  text(x=1.1, y=1.1, labels=TeX('$\\textit{\\Delta}\\theta$'))
   text(x=1, y=1.27, labels=TeX('$\\theta$'))
   tmp <- sqrt(2*log(2))*(p$cv)
   arrows(x0=1-tmp, x1=1+tmp, y0=0.5,y1=0.5,code=3, lwd=2, length=0.1)

@@ -43,7 +43,7 @@ paramTraitbasedmodel <- function(
   #
   # Width of feeding preference
   #
-  param$sigma <- 1.3 # Increased from the default value (1) to represent a spread in different species' prey size preference
+  param$sigma <- 1.3 # Increased from the default value (1) p$Ato represent a spread in different species' prey size preference
   #
   # Resource parameters
   #

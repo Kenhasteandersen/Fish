@@ -141,25 +141,27 @@ plotTraitsFishbase <- function() {
   # Trait space
   #
   factor = 1
-  loglogpanel(xlim=c(4,500), ylim=c(0.5, 150), bExponential=FALSE,
-              xlab='Asymptotic length $\\textit{L}_{\\infty}$ (cm)', 
+  #loglogpanel(xlim=c(4,500), ylim=c(0.5, 150), bExponential=FALSE,
+  Woo = weight(Loo)
+  loglogpanel(xlim=c(.7,1e6), ylim=c(0.5, 150), bExponential=TRUE,
+                          xlab='Asymptotic weight $\\textit{W}_{\\infty}$ (g)', 
               ylab='Growth rate, $\\textit{A}$ (g$^{0.25}yr^{-1})')
-  points(Loo[ixActi], A[ixActi], pch=dots, cex=factor*sqrt(r[ixActi]), col=gray(0.3, alpha=0.4))
-  points(Loo[ixElasmo], A[ixElasmo], pch=triangles, cex=2*factor*sqrt(r[ixElasmo]), col="white" )
-  points(Loo[ixElasmo], A[ixElasmo], pch=triangles, cex=factor*sqrt(r[ixElasmo]), col="black" )
+  points(Woo[ixActi], A[ixActi], pch=dots, cex=factor*sqrt(r[ixActi]), col=gray(0.3, alpha=0.4))
+  points(Woo[ixElasmo], A[ixElasmo], pch=triangles, cex=2*factor*sqrt(r[ixElasmo]), col="white" )
+  points(Woo[ixElasmo], A[ixElasmo], pch=triangles, cex=factor*sqrt(r[ixElasmo]), col="black" )
   
     
   # Highlight Coryphaena hippurus:
   ixCoryphaena <- growth$sciname == "Coryphaena hippurus"
-  points(Loo[ixCoryphaena], A[ixCoryphaena], pch=dots, cex=factor*sqrt(r[ixCoryphaena]), col="blue")
+  points(Woo[ixCoryphaena], A[ixCoryphaena], pch=dots, cex=factor*sqrt(r[ixCoryphaena]), col="blue")
   
   # Highlight Cod
   ixCod <- growth$sciname == "Gadus morhua"
-  points(Loo[ixCod], A[ixCod], pch=dots, cex=sqrt(r[ixCod]), col="orange")
+  points(Woo[ixCod], A[ixCod], pch=dots, cex=sqrt(r[ixCod]), col="orange")
   
   # Highlight tiger shark
   ixTiger <- growth$sciname == "Galeocerdo cuvier"
-  points(Loo[ixTiger], A[ixTiger], pch=dots, cex=sqrt(r[ixTiger]), col="yellow")
+  points(Woo[ixTiger], A[ixTiger], pch=dots, cex=sqrt(r[ixTiger]), col="yellow")
   
   # Highlight herring
   #ixHerring <- growth$sciname == "Clupea harengus"
@@ -168,35 +170,34 @@ plotTraitsFishbase <- function() {
   # Highlight Gobies
   goby_list <- species_list(Family="Gobiidae")
   ixGoby <- which( growth$sciname %in% goby_list )
-  points(Loo[ixGoby], A[ixGoby], pch=dots, cex=factor*sqrt(r[ixGoby]), col="green" )
+  points(Woo[ixGoby], A[ixGoby], pch=dots, cex=factor*sqrt(r[ixGoby]), col="green" )
   
   # Highlight Gasterosteidae (sticklbacks)
   stickle_list <- species_list(Family="Gasterosteidae")
   ixStickle <- which( growth$sciname %in% stickle_list )
-  points(Loo[ixStickle], A[ixStickle], pch=dots, cex=factor*sqrt(r[ixStickle]), col="magenta" )
+  points(Woo[ixStickle], A[ixStickle], pch=dots, cex=factor*sqrt(r[ixStickle]), col="magenta" )
   
   # highlight rockfish
   rockfish_list <- species_list(Family="Sebastidae")
   ixRockfish <- which( growth$sciname %in% rockfish_list )
-  points(Loo[ixRockfish], A[ixRockfish], pch=dots, cex=factor*sqrt(r[ixGoby]), col="red" )
+  points(Woo[ixRockfish], A[ixRockfish], pch=dots, cex=factor*sqrt(r[ixGoby]), col="red" )
   
 
   # Distribution of growth:
   out=density(log(A[ixActi]))
-  defaultpanel(log(c(4,500)), ylim=log(c(0.5, 150)), new=TRUE, xaxis = FALSE, yaxis=FALSE)
-  polygon(x=6.4-0.5*(c(out$y, 0*out$y)), y=c(out$x, out$x[seq(length(out$x),1,by=-1)]),
+  defaultpanel(log(c(0.7,1e6)), ylim=log(c(0.5, 150)), new=TRUE, xaxis = FALSE, yaxis=FALSE)
+  polygon(x=log(1.75e6)-1.5*(c(out$y, 0*out$y)), y=c(out$x, out$x[seq(length(out$x),1,by=-1)]),
           border=NA, col=stdgrey)
   
   # Distribution of Winf
-  out=density(log(Loo[ixActi]))
-  polygon(x=c(out$x,out$x[1]), y=c(out$y, out$y[1])-0.92, border=NA, col=stdgrey)
+  out=density(log(Woo[ixActi]))
+  polygon(x=(c(out$x,out$x[1])), y=2*c(out$y, out$y[1])-0.92, border=NA, col=stdgrey)
 
-  loglogpanel(xlim=c(4,500), ylim=c(0.5, 150), bExponential=FALSE, new=TRUE)
+  loglogpanel(xlim=c(.7, 1e6), ylim=c(0.5, 150), bExponential=TRUE, new=TRUE)
 }
 
 plotAllChapterTraits <- function() {
   #pdfplot(FUN=plotTraits, "ChapterTraits/traits.pdf", width=doublewidth, height=2*height)
   pdfplot(FUN=plotTraitsFishbase, "ChapterTraits/traits.pdf", width=doublewidth, height=2*height)
-  
 }
   

@@ -587,55 +587,11 @@ plotCommunityMSY <- function(param=paramTraitbasedmodel(), n=20) {
     load("Data/optimization.Rdata")
   
   
-  # fig1 <- ggplot(dat=optYield) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FF-FFerr, ymax=FF+FFerr),fill=grey(0.8), alpha=0.5) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FP-FPerr, ymax=FP+FPerr),fill=grey(0.8), alpha=0.5) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FB-FBerr, ymax=FB+FBerr),fill=grey(0.8), alpha=0.5) +
-  #   geom_line(aes(x=F/3, y=FF), size=thin) +
-  #   geom_line(aes(x=F/3, y=FP)) +
-  #   geom_line(aes(x=F/3, y=FB), size=thick) +
-  #   geom_line(aes(x=F/3, y=Y/max(Y)), size=thick, colour=grey(0.8))
-  # fig1 <- semilogx(fig1, ylim=c(0,1)) +
-  #   xlab(TeX("Average F ($yr^{-1}$)")) + 
-  #   ylab("Fraction") 
-  # fig1
-  # 
-  # fig2 <- ggplot(dat=optRent) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FF-FFerr, ymax=FF+FFerr),fill=grey(0.8), alpha=0.5) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FP-FPerr, ymax=FP+FPerr),fill=grey(0.8), alpha=0.5) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FB-FBerr, ymax=FB+FBerr),fill=grey(0.8), alpha=0.5) +
-  #   geom_line(aes(x=F/3, y=FF), size=thin) +
-  #   geom_line(aes(x=F/3, y=FP)) +
-  #   geom_line(aes(x=F/3, y=FB), size=thick) +
-  #   geom_line(aes(x=F/3, y=Y/max(Y)), size=thick, colour="grey")
-  # fig2 <- semilogx(fig2, ylim=c(0,1)) +
-  #   xlab(TeX("Average F ($yr^{-1}$)")) + 
-  #   ylab("Fraction")
-  # fig2
-  # 
-  # fig3 <- ggplot(dat=optYieldConstrained) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FF-FFerr, ymax=FF+FFerr),fill=grey(0.8), alpha=0.5) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FP-FPerr, ymax=FP+FPerr),fill=grey(0.8), alpha=0.5) +
-  #   #geom_ribbon(aes(x=F/3, ymin=FB-FBerr, ymax=FB+FBerr),fill=grey(0.8), alpha=0.5) +
-  #   geom_line(aes(x=F/3, y=FF), size=thin) +
-  #   geom_line(aes(x=F/3, y=FP)) +
-  #   geom_line(aes(x=F/3, y=FB), size=thick) +
-  #   geom_line(aes(x=F/3, y=Y/max(optYield$Y)), size=thick, colour="grey")
-  # fig3 <- semilogx(fig3, ylim=c(0,1)) +
-  #   xlab(TeX("Average F ($yr^{-1}$)")) + 
-  #   ylab("Fraction")
-  # fig3
-  # 
-  # grid <- plot_grid(fig1, fig2, fig3, ncol=3, align="h")
-  # ggsave("ChapterCommunityFishing/CommunityMSY.pdf", width=doublewidth, height=height)
-  # grid
-  
-  
-  
   defaultplot()
   par(mar=par()$mar + c(0,0,0,10)) # space for legend
   defaultpanel(xlim=c(0,2.67), ylim=c(0,1),
-               xlab="Average $\\textit{F}$ ($yr^{-1}$)", ylab="Fraction")
+               xlab="Average $\\textit{F}$ ($yr^{-1}$)", 
+               ylab="Fraction of $\\textit{F}$ on each fleet")
   lines(optYield$F/3, optYield$FF, col=stdgrey, lwd=1)
   lines(optYield$F/3, optYield$FP, col=stdgrey, lwd=2)
   lines(optYield$F/3, optYield$FB, col=stdgrey, lwd=3)

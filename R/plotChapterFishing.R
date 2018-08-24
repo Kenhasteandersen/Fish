@@ -156,26 +156,32 @@ plotSpectraFishing <- function()
   p <- baseparameters()
   W <- c(10, 333, 10000)
   
-  fig <- ggplot()
+  defaultplot()
+  par(mar=par()$mar + c(0,0,0,10)) # space for legend
+  loglogpanel(xlim=c(5e-3, 1),
+              ylim=c(5e-3, 0.05),
+              xlab="Relative weight $\\textit{w}/\\textit{W}_\\infty$",
+              ylab="Biomass spectrum, $\\textit{wN}(\\textit{w})  ")
+
   for (i in 1:length(W))
   {
     p$F <- F
     p$W <- W[i]
     spec <- spectrum(p)
-    fig <- fig + geom_line(data=data.frame(x=spec$w/p$W, y=spec$w*spec$NprR*p$W^(p$n+p$a-1)), aes(x=x,y=y), size=i/3)
+    lines(spec$w/p$W, spec$w*spec$NprR*p$W^(p$n+p$a-1), lwd=i)
   }
   p$F <- 0
   spec <- spectrum(p)
-  
-  fig <- fig + 
-    geom_line(data=spec, aes(x=w/p$W, y=w*NprR*R*p$W^(p$n+p$a-1)), size=thick, color=grey(0.5)) +
-    xlab(TeX("Relative weight $\\textit{w}/\\textit{W}_\\infty$"))+
-    ylab(TeX("Biomass spectrum, $\\textit{wN}(\\textit{w})  ")) +
-    geom_vline(xintercept = p$etaM, linetype="dotted", size=thin)
-  fig <- loglog(fig, ylim=c(5e-3,0.05), xlim=c(5e-3,1))
-  
-  ggsave("ChapterFishing/spectrumfishing.pdf", width=singlewidth, height=height)
-  fig
+  lines(spec$w/p$W, spec$w*spec$NprR*p$W^(p$n+p$a-1), lwd=3, col=stdgrey)
+  vline(p$etaM)
+  legend("right", bty="n", inset=c(-0.5,0), xpd=TRUE,
+         legend=c("Unfished",
+                  TeX("$\\textit{W}_{\\infty}$ = 10 g"),
+                  TeX("$\\textit{W}_{\\infty}$ = 333 g"),
+                  TeX("$\\textit{W}_{\\infty}$ = 10 kg")), 
+         col=c(stdgrey, black, black, black),
+         lwd=c(3,1,3,4),
+         title="")
 }
 
 plotFishing <- function()
@@ -316,8 +322,8 @@ plotFishingComplete <- function()
         annotate("text", x=refs$Fmax, y=1.21, label="F[max]", parse=TRUE,vjust=0) +
         annotate("segment", x=refs$Fcrash, xend=refs$Fcrash, y=.5, yend=0,arrow=arrow(length=unit(2,"mm"))) +
         annotate("text", x=refs$Fcrash, y=.51, label="F[crash       ]",parse=TRUE, vjust=0) +
-        annotate("segment", x=refs$Flim, xend=refs$Flim, y=1.2, yend=0.5,arrow=arrow(length=unit(2,"mm"))) +
-        annotate("text", x=refs$Flim, y=1.21, label="F[lim]", parse=TRUE,vjust=0) +
+        annotate("segment", x=refs$Flim, xend=refs$Flim, y=0.75, yend=0.5,arrow=arrow(length=unit(2,"mm"))) +
+        annotate("text", x=refs$Flim, y=0.76, label="F[lim]", parse=TRUE,vjust=0) +
         annotate("segment", x=refs$Fmsy+0.1, xend=refs$Fmsy, y=Bmsy, yend=Bmsy,arrow=arrow(length=unit(2,"mm"))) +
         annotate("text", x=refs$Fmsy+0.1, y=Bmsy, label=" B[msy]", parse=TRUE,hjust=0) +
         annotate("segment", x=refs$Flim+0.1, xend=refs$Flim, y=Blim+0.05, yend=Blim,arrow=arrow(length=unit(2,"mm"))) +
@@ -766,6 +772,7 @@ plotYield <- function(n=50)
 plotAllChapterFishing <- function()
 {
   plotSelectivity()
+  pdfplot(FUN=plotSpectraFishing, "ChapterFishing/spectrumfishing.pdf", width=doublewidth, height=height)
   plotTrawl()
   plotSpectraFishing()
   

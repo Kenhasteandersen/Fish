@@ -114,11 +114,11 @@ test <- function() {
 defaultpanel <- function(xlim, ylim, 
                          xlab='', ylab='', 
                          xaxis=TRUE, yaxis=TRUE, label=FALSE, new=FALSE,
-                         bty="o") {
+                         bty="o", xaxs="r") {
   plot(1, type='n', 
        ylim=range(ylim[!is.na(ylim)]), 
        xlim=range(xlim[!is.na(xlim)]), axes=FALSE, xlab='', ylab='', par(new=new),
-       bty=bty)
+       bty=bty, xaxs=xaxs)
   mtext(side=bottom, line=1, TeX(xlab), cex=par()$cex)
   mtext(side=left, line=1, TeX(ylab), cex=par()$cex)
   if (label) 
@@ -133,12 +133,12 @@ defaultpanel <- function(xlim, ylim,
 }
 
 semilogxpanel <- function(xlim, ylim, xlab='', ylab='', 
-                          xaxis=TRUE, yaxis=TRUE, label=FALSE, new=FALSE) {
+                          xaxis=TRUE, yaxis=TRUE, label=FALSE, new=FALSE, xaxs="r") {
   ylim <- range(na.omit(ylim))
   xlim <- range(na.omit(xlim))
   plot(1, type='n', log='x',
        ylim=ylim, 
-       xlim=xlim, axes=FALSE, xlab='',ylab='', par(new=new))
+       xlim=xlim, axes=FALSE, xlab='',ylab='', xaxs=xaxs, par(new=new))
 
   mtext(side=bottom, line=1, TeX(xlab))
   mtext(side=left, line=1, TeX(ylab))
@@ -167,12 +167,12 @@ semilogypanel <- function(xlim, ylim, xlab='', ylab='',
 
 loglogpanel <- function(xlim, ylim, xlab='', ylab='', 
                         xaxis=TRUE, yaxis=TRUE, label=FALSE,
-                        bExponential=TRUE, new=FALSE, powx=NA, powy=NA) {
+                        bExponential=TRUE, new=FALSE, powx=NA, powy=NA, xaxs="r") {
   ylim <- range(na.omit(ylim))
   xlim <- range(na.omit(xlim))
   plot(1, type='n', log='xy',
        ylim=ylim, 
-       xlim=xlim, axes=FALSE, xlab='',ylab='', par(new=new))
+       xlim=xlim, axes=FALSE, xlab='',ylab='', par(new=new), xaxs=xaxs)
   mtext(side=bottom, line=1.1, TeX(xlab))
   mtext(side=left, line=1.5, TeX(ylab))
   if (label) 

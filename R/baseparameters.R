@@ -28,6 +28,7 @@ baseparameters <- function(W=NULL)
   p$u <- 5
   p$w0 <- 0.001
   p$epsR <- 0.03 #0.015
+  p$epsR_Elasmobranch = 0.3
   p$ElasmobranchEggMassRatio <- 0.0044
   
   # Mortality:

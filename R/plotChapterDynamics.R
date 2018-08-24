@@ -489,7 +489,7 @@ plotRecoveryExample <- function() {
   
   defaultplot()
   plot(time, SSB, type="l", lwd=2, ylim=c(0,10), xlab="Time (years)", ylab="")
-  lines(time, Yield, col=stdgrey, lwd=2)
+  lines(time, Yield, col=lightgrey, lwd=2)
   hline(1)
   vline(5)
   vline(20)
@@ -497,7 +497,7 @@ plotRecoveryExample <- function() {
   text(x=2.5, y=9.5, labels=TeX("\\textit{F} = 0"))
   text(x=12.5, y=9.5, labels=TeX("\\textit{F} = 1.5 yr^{-1}"))
   text(x=23, y=9.5, labels=TeX("\\textit{F} = 0"))
-  text(x=28.5, y=9.35, labels=TeX("\\textit{F} = \\textit{F}_{MSY}"))
+  text(x=28.5, y=9.5, labels=TeX("\\textit{F} = \\textit{F}_{MSY}"))
   mtext(TeX('\\textit{Y}/\\textit{Y}_{MSY}'), left, 1, outer=FALSE, adj=0, col=stdgrey)
   mtext(TeX('\\textit{B}_{SSB}/\\textit{B}_{MSY}'), left, 1, outer=FALSE, adj=1)
 }
