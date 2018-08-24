@@ -370,7 +370,7 @@ calcYield_vs_F <- function(param, res, iSpecies, nPoints=10) {
     resF <- runspectrum(p, resF)
     N <- resF$N[resF$nSave,iSpecies,]
     muF <- p$funcFishing(resF$fish$w,p)
-    Yield[i] <- sum(N*resF$fish$w*resF$fish$dw*muF[iSpecies,])
+    Yield[i] <- trapz(resF$w+0.5*resF$fish$dw, N*resF$fish$w*muF[iSpecies,]) #sum(N*resF$fish$w*resF$fish$dw*muF[iSpecies,])
     
     wgt = calcWeightAtAge(p, resF)
     wgtmat[i] = wgt$w[which(wgt$ages > ageMaturation(p$W,p))[1]]

@@ -274,6 +274,8 @@ SingleStockCalculatorServer <- function(input, output, session) {
     #
     if (input$bClassicParameters == TRUE) 
       updatePhysParam(input, session)
+    else
+      updateClassicParam(input, session)
     
     W = 10^input$W10
     param$W = W
@@ -509,7 +511,7 @@ SingleStockCalculatorServer <- function(input, output, session) {
                           TeX("$\\textit{F}_{lim}$"),
                           TeX("$\\textit{F}_{max}$"),
                           TeX("$\\textit{F}_{msy}$")),
-            main="Moratlity reference points",
+            main="Mortatlity reference points",
             xlab=TeX("Fishing mortality (yr$^{-1}$)"),
             horiz=TRUE, las=1,
             border=NA)
