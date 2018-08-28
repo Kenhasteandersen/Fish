@@ -1,4 +1,4 @@
-dir.create("ChapterEpilogue")
+dir.create("TeX/ChapterEpilogue")
 
 plotOptimalForaging = function() {
   p = baseparameters()
@@ -31,7 +31,7 @@ plotOptimalForaging = function() {
 }
 
 plotAllChapterEpilogue = function() {
-  pdfplot("ChapterEpilogue/OptimalForaging.pdf",
+  pdfplot("TeX/ChapterEpilogue/OptimalForaging.pdf",
           plotOptimalForaging, width=doublewidth,
           height=height)
 }

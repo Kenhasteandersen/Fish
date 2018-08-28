@@ -3,7 +3,7 @@ source("R/basefunctions.R")
 source("R/baseparameters.R")
 source("R/community.R")
 
-dir.create("ChapterSharks_vs_teleosts")
+dir.create("TeX/ChapterSharks_vs_teleosts")
 
 getOlssonData <- function() {
   data <- read.csv("Data/fecundpruned.csv",header=TRUE,sep=",")
@@ -265,7 +265,7 @@ plotComparison2 <- function() {
 
 
 plotAllChapterSharks_vs_teleosts <- function() {
-  pdfplot(FUN=plotComparison, "ChapterSharks_vs_teleosts/comparison.pdf", width=doublewidth, height=height)
-  pdfplot(FUN=plotEggSize, "ChapterSharks_vs_teleosts/eggsize.pdf", width=1.5*singlewidth, height=1.5*height)
-  pdfplot(FUN=plotComparison2, "ChapterSharks_vs_teleosts/comparison2.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotComparison, "TeX/ChapterSharks_vs_teleosts/comparison.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotEggSize, "TeX/ChapterSharks_vs_teleosts/eggsize.pdf", width=1.5*singlewidth, height=1.5*height)
+  pdfplot(FUN=plotComparison2, "TeX/ChapterSharks_vs_teleosts/comparison2.pdf", width=doublewidth, height=height)
 }

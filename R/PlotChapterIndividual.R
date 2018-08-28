@@ -1,11 +1,11 @@
 #
-# Chapter 3
+# TeX/Chapter 3
 #
 source("R/basetools.R")
 source("R/baseparameters.R")
 source("R/basefunctions.R")
 
-dir.create("ChapterIndividual")
+dir.create("TeX/ChapterIndividual")
 
 getGrowthParameters <- function()
 {
@@ -126,7 +126,7 @@ plotKvsLinf <- function()
     ylab(TeX("von Bertalanffy coefficient, $\\textit{K}$ (1/yr)"))
   fig <- loglog(fig, ylim=c(0.03, 3))
   
-  ggsave("ChapterIndividual/KvsLinf.pdf",width=singlewidth,height=singlewidth)
+  ggsave("TeX/ChapterIndividual/KvsLinf.pdf",width=singlewidth,height=singlewidth)
   fig
 }
 
@@ -160,7 +160,7 @@ plotA <- function()
     labs(colour="",shape="")
   fig <- loglog(fig)  
   
-  ggsave("ChapterIndividual/A.pdf", width=singlewidth, height=height)
+  ggsave("TeX/ChapterIndividual/A.pdf", width=singlewidth, height=height)
   fig
 }
 
@@ -283,7 +283,7 @@ plotR <- function()
     ylab(TeX("Repro. output  ($g^{-0.25}$)"))
   
   fig <- loglog(fig)
-  ggsave("ChapterIndividual/R.pdf", width=singlewidth, height=height)
+  ggsave("TeX/ChapterIndividual/R.pdf", width=singlewidth, height=height)
   fig
 }  
 
@@ -349,7 +349,7 @@ plotGrowth <- function()
     scale_y_continuous(oob=rescale_none)
   fig <- mytheme(fig)
   
-  ggsave("ChapterIndividual/Growth.pdf",width=width, height=height, units="cm")
+  ggsave("TeX/ChapterIndividual/Growth.pdf",width=width, height=height, units="cm")
   fig
 }
 
@@ -410,7 +410,7 @@ plotBudget <- function()
   # fig2 <- semilogx(fig2)
   # fig2
   
-  ggsave("ChapterIndividual/budget.pdf",width=singlewidth, height=height)
+  ggsave("TeX/ChapterIndividual/budget.pdf",width=singlewidth, height=height)
   fig
 }
 
@@ -438,10 +438,10 @@ plotTestGrowth <- function(K, Linf)
 
 plotAllChapterIndividual <- function()
 {
-  pdfplot("ChapterIndividual/vonB2.pdf", plotSketch_and_vonB, width=doublewidth, height=height)
+  pdfplot("TeX/ChapterIndividual/vonB2.pdf", plotSketch_and_vonB, width=doublewidth, height=height)
   plotKvsLinf()
   plotA()
-  pdfplot("ChapterIndividual/maturity.pdf", plotMaturity, width=doublewidth, height=height)
+  pdfplot("TeX/ChapterIndividual/maturity.pdf", plotMaturity, width=doublewidth, height=height)
   plotR()
   plotGrowth()
   plotBudget()

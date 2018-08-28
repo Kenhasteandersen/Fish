@@ -2,7 +2,7 @@ source("R/basetools.R")
 source("R/basefunctions.R")
 source("R/baseparameters.R")
 
-dir.create("ChapterTraits")
+dir.create("TeX/ChapterTraits")
 
 getOlssonData <- function() {
   data <- read.csv("Data/fecundpruned.csv",header=TRUE,sep=",")
@@ -42,7 +42,7 @@ plotTraits <- function(bWithNames = FALSE) {
   #
   # Data from Kooijman and Gislason:
   #
-  #data2 = read.csv("Chapter3/KooijmanGislasonPruned.csv", header=FALSE, col.names=c("K","Linf","T"))
+  #data2 = read.csv("TeX/Chapter3/KooijmanGislasonPruned.csv", header=FALSE, col.names=c("K","Linf","T"))
   data2 = read.csv("Data/KooijmanGislasonPruned.csv", sep=',')
   data2$Phylum = "t" # all teleost data
   data2$A <- calcA(data2$K, data2$Linf)
@@ -197,7 +197,7 @@ plotTraitsFishbase <- function() {
 }
 
 plotAllChapterTraits <- function() {
-  #pdfplot(FUN=plotTraits, "ChapterTraits/traits.pdf", width=doublewidth, height=2*height)
-  pdfplot(FUN=plotTraitsFishbase, "ChapterTraits/traits.pdf", width=doublewidth, height=2*height)
+  #pdfplot(FUN=plotTraits, "TeX/ChapterTraits/traits.pdf", width=doublewidth, height=2*height)
+  pdfplot(FUN=plotTraitsFishbase, "TeX/ChapterTraits/traits.pdf", width=doublewidth, height=2*height)
 }
   

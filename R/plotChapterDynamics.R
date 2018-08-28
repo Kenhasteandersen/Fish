@@ -4,7 +4,7 @@ source("R/baseparameters.R")
 source("R/community.R")
 require(jpeg)
 
-dir.create("ChapterDynamics")
+dir.create("TeX/ChapterDynamics")
 
 calcEigenvalue <- function(p) {
   W <- p$W
@@ -703,9 +703,9 @@ plotNoisyFishing <- function() {
       R0[j,] <- unlist(results[2,])
       r[j,] <- unlist(results[3,])
     }
-    save(CV,R0,r,ref, file="ChapterDynamics/NoisyFishing.RData")
+    save(CV,R0,r,ref, file="TeX/ChapterDynamics/NoisyFishing.RData")
   } else
-    load("ChapterDynamics/NoisyFishing.RData")
+    load("TeX/ChapterDynamics/NoisyFishing.RData")
   
   defaultplot()
   defaultpanel(xlim=F, ylim=c(0,6), 
@@ -786,10 +786,10 @@ testcalcUnstructuredDynamics <- function(W) {
 
 
 plotAllChapterDynamics <- function() {
-  pdfplot(FUN=plotEigen, "ChapterDynamics/eigen.pdf", width=doublewidth, height=height)
-  pdfplot(FUN=plotDynamics, "ChapterDynamics/dynamics.pdf", width=1.5*singlewidth, height=1.5*height)
-  pdfplot(FUN=plotRecoveryExample, "ChapterDynamics/recoveryexample.pdf", width=doublewidth, height=height)
-  pdfplot(FUN=plotRecovery, "ChapterDynamics/recovery.pdf", width=doublewidth, height=height)
-  pdfplot(FUN=plotNoisyRecruitment, "ChapterDynamics/noisyrecruitment.pdf", width=doublewidth, height=height)
-  #pdfplot(FUN=plotNoisyFishing, "ChapterDynamics/noisyfishing.pdf", width=singlewidth, height=height)
+  pdfplot(FUN=plotEigen, "TeX/ChapterDynamics/eigen.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotDynamics, "TeX/ChapterDynamics/dynamics.pdf", width=1.5*singlewidth, height=1.5*height)
+  pdfplot(FUN=plotRecoveryExample, "TeX/ChapterDynamics/recoveryexample.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotRecovery, "TeX/ChapterDynamics/recovery.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotNoisyRecruitment, "TeX/ChapterDynamics/noisyrecruitment.pdf", width=doublewidth, height=height)
+  #pdfplot(FUN=plotNoisyFishing, "TeX/ChapterDynamics/noisyfishing.pdf", width=singlewidth, height=height)
 }

@@ -3,7 +3,7 @@ source("R/basefunctions.R")
 source("R/baseparameters.R")
 source("R/community.R")
 
-dir.create("ChapterConsumerResource")
+dir.create("TeX/ChapterConsumerResource")
 
 plotGrowthF0 <- function() {
   require(deSolve)
@@ -446,7 +446,7 @@ plotSpatialPlaice = function() {
     coord_map(xlim = xL, ylim = yL)
   p3plaice
   
-  ggsave("ChapterConsumerResource/SpatialPlaice.pdf",
+  ggsave("TeX/ChapterConsumerResource/SpatialPlaice.pdf",
          grid.arrange(p1plaice, p2plaice,p3plaice ,ncol=3),
          width=doublewidth, height=height)
 }
@@ -624,17 +624,17 @@ compareModels <- function(W=1000) {
 }
 
 plotAllChapterConsumerResource = function() {
-  pdfplot("ChapterConsumerResource/PlaiceGrowth.pdf",
+  pdfplot("TeX/ChapterConsumerResource/PlaiceGrowth.pdf",
           plotPlaiceGrowth, width=doublewidth, height=height)
-  pdfplot("ChapterConsumerResource/GrowthF0.pdf", plotGrowthF0, width=singlewidth, height=height)
-  pdfplot("ChapterConsumerResource/Spectra_ConsumerResourceModel.pdf", 
+  pdfplot("TeX/ChapterConsumerResource/GrowthF0.pdf", plotGrowthF0, width=singlewidth, height=height)
+  pdfplot("TeX/ChapterConsumerResource/Spectra_ConsumerResourceModel.pdf", 
           plotSpectra_ConsumerResourceModel, width=doublewidth, height = 2*height)
-  pdfplot("ChapterConsumerResource/ConsumerResourceVariation.pdf",
+  pdfplot("TeX/ChapterConsumerResource/ConsumerResourceVariation.pdf",
           plotConsumerResourceVariation2, width=doublewidth,
           height=height)
-  pdfplot("ChapterConsumerResource/FishingvsWf.pdf",
+  pdfplot("TeX/ChapterConsumerResource/FishingvsWf.pdf",
           plotFishingvsWf, width=doublewidth, height=height)
-  pdfplot("ChapterConsumerResource/OptimalEtaF.pdf",
+  pdfplot("TeX/ChapterConsumerResource/OptimalEtaF.pdf",
           plotOptimalEtaF, width=doublewidth, height=height)
   plotSpatialPlaice()
 }

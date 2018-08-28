@@ -1,5 +1,5 @@
 #
-# Plots for chapter 2
+# Plots for TeX/Chapter 2
 # 
 
 source("R/basetools.R")
@@ -7,7 +7,7 @@ source("R/basefunctions.R")
 source("R/baseparameters.R")
 source("R/PlotChapterIndividual.R")
 
-dir.create("ChapterSizeSpectrumTheory")
+dir.create("TeX/ChapterSizeSpectrumTheory")
 
 plotSheldon <- function() {
   data <- read.csv("Data/sheldon.dat")
@@ -111,7 +111,7 @@ plotSheldon <- function() {
   #scale_x_log10(breaks = 10^seq(from=-14,by=2,to=10),
   #              labels = trans_format("log10", math_format(10^.x)))
   
-  ggsave("ChapterSizeSpectrumTheory/sheldon.pdf", width=14, height=5, units="cm")
+  ggsave("TeX/ChapterSizeSpectrumTheory/sheldon.pdf", width=14, height=5, units="cm")
   fig
 }
 
@@ -238,7 +238,7 @@ plotClearance <- function() {
   
   fig
   
-  ggsave("ChapterSizeSpectrumTheory/Clearance_rate.pdf", width=1.5*singlewidth, height=height)
+  ggsave("TeX/ChapterSizeSpectrumTheory/Clearance_rate.pdf", width=1.5*singlewidth, height=height)
 }
 
 
@@ -322,7 +322,7 @@ plotImax <- function() {
   tmp[datImax$type=="Pisces"] = 1
   datImax$type2 <- factor(tmp,labels=c("Other","Fish"))
   
-  #source("R/PlotAllChapter3.R")
+  #source("R/PlotAllTeX/Chapter3.R")
   dat3 <- getGrowthParameters()
   epsa <- 0.6
   f0 <- 0.6
@@ -384,7 +384,7 @@ plotImax <- function() {
   # 
   
   grid <- plot_grid(fig2,fig, ncol=2, align="h")
-  ggsave("ChapterSizeSpectrumTheory/RespirationAndImax.pdf", grid, width=doublewidth, height=doublewidth/2)
+  ggsave("TeX/ChapterSizeSpectrumTheory/RespirationAndImax.pdf", grid, width=doublewidth, height=doublewidth/2)
 }
 
 plotRes2<-function() {
@@ -392,7 +392,7 @@ plotRes2<-function() {
   #
   # Respiration
   #
-  dat <- read.csv("ChapterSizeSpectrumTheory/Appendix respiration rates -revised.csv",header=TRUE,sep=";")
+  dat <- read.csv("TeX/ChapterSizeSpectrumTheory/Appendix respiration rates -revised.csv",header=TRUE,sep=";")
   dat$w <- 8e-3*dat$Body.mass
   dat$resp <- 1e-6*0.5*24*365*dat$Spec.Resp.15C*dat$Body.mass
   dat <- data.frame(dat)
@@ -404,7 +404,7 @@ plotRes2<-function() {
   ixfish <- dat$Group=="Pisces" & !is.na(dat$resp)
   
   # Acuna data:
-  #datA <- read.csv("ChapterSizeSpectrumTheory/Acuna_et_al_2011_respiration.csv", header=TRUE, sep=";")
+  #datA <- read.csv("TeX/ChapterSizeSpectrumTheory/Acuna_et_al_2011_respiration.csv", header=TRUE, sep=";")
   #datA$w <- datA$WW
   # conv: Cww/C * gC/mol * C/O * milli * days/year
   #Q10 = 1.83
@@ -499,7 +499,7 @@ plotUrsin <- function() {
   
   fig
   
-  ggsave("ChapterSizeSpectrumTheory/Ursin.pdf", width=1.5*singlewidth, height=height)
+  ggsave("TeX/ChapterSizeSpectrumTheory/Ursin.pdf", width=1.5*singlewidth, height=height)
   
 }
 
@@ -568,7 +568,7 @@ plotPredPrey <- function() {
   #   coord_fixed(ratio=1)
   
   
-  ggsave("ChapterSizeSpectrumTheory/PredPrey.pdf", width=singlewidth, height=singlewidth)
+  ggsave("TeX/ChapterSizeSpectrumTheory/PredPrey.pdf", width=singlewidth, height=singlewidth)
 
   fig
 }
@@ -702,7 +702,7 @@ plotCalculations <- function() {
   #  ylab("Sheldon spectrum (g/L)") +
   #  labs(colour="",shape="")
   #fig2
-  #ggsave("ChapterSizeSpectrumTheory/PresentationSheldon.pdf", width=10, height=7, units="cm")
+  #ggsave("TeX/ChapterSizeSpectrumTheory/PresentationSheldon.pdf", width=10, height=7, units="cm")
   
 }
 
@@ -752,7 +752,7 @@ plotMortality <- function() {
     ylab("Mortality rate (1/yr)") +
     labs(colour="",shape="")
   
-  ggsave("ChapterSizeSpectrumTheory/Mortality.pdf", width=1.5*singlewidth, height=1.5*height)
+  ggsave("TeX/ChapterSizeSpectrumTheory/Mortality.pdf", width=1.5*singlewidth, height=1.5*height)
   fig
 }
 
@@ -778,9 +778,9 @@ plotAllChapterSizeSpectrumTheory <- function()
   plotSheldon()
   plotClearance()
   plotImax()
-  #pdfplot("ChapterSizeSpectrumTheory/PredPrey.pdf", plotPredPrey, width=singlewidth, height=singlewidth)
+  #pdfplot("TeX/ChapterSizeSpectrumTheory/PredPrey.pdf", plotPredPrey, width=singlewidth, height=singlewidth)
   plotPredPrey()
   plotUrsin()
-  pdfplot("ChapterSizeSpectrumTheory/Calculations.pdf", plotCalculations, width=5, height=height)
+  pdfplot("TeX/ChapterSizeSpectrumTheory/Calculations.pdf", plotCalculations, width=5, height=height)
   plotMortality()
 }

@@ -1,6 +1,6 @@
 source('R/QuantitativeGenetics.R')
 
-dir.create("ChapterFIE")
+dir.create("TeX/ChapterFIE")
 
 plotConover <- function() {
   defaultplot(mfcol=c(1,2))
@@ -268,15 +268,15 @@ plotSelectionSelectivity <- function() {
 
 
 plotAllChapterFIE <- function() {
-  pdfplot(FUN=plotConover, "ChapterFIE/Conover.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotConover, "TeX/ChapterFIE/Conover.pdf", width=doublewidth, height=height)
 
-  pdfplot(FUN=plotQG, "ChapterFIE/QG.pdf", width=1.25*singlewidth, height=1.25*height)
+  pdfplot(FUN=plotQG, "TeX/ChapterFIE/QG.pdf", width=1.25*singlewidth, height=1.25*height)
 
-  pdfplot(FUN=plotSelectionResponse, "ChapterFIE/SelectionResponse.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotSelectionResponse, "TeX/ChapterFIE/SelectionResponse.pdf", width=doublewidth, height=height)
   
-  pdfplot(FUN=plotSelectionResponseLarge, "ChapterFIE/SelectionResponseLarge.pdf", width=doublewidth, height=height)
+  pdfplot(FUN=plotSelectionResponseLarge, "TeX/ChapterFIE/SelectionResponseLarge.pdf", width=doublewidth, height=height)
   
-  pdfplot(FUN=plotSelectionResponsevsSpawner, "ChapterFIE/SpawnerFishing.pdf", height=1.2*height)
+  pdfplot(FUN=plotSelectionResponsevsSpawner, "TeX/ChapterFIE/SpawnerFishing.pdf", height=1.2*height)
   
-  pdfplot("ChapterFIE/SelectionSelectivity.pdf", plotSelectionSelectivity, height=height, width=doublewidth)
+  pdfplot("TeX/ChapterFIE/SelectionSelectivity.pdf", plotSelectionSelectivity, height=height, width=doublewidth)
 }

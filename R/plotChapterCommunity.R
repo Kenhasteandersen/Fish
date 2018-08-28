@@ -11,7 +11,7 @@ require(cowplot)
 require(gam)
 require(numDeriv)
 
-dir.create("ChapterCommunity")
+dir.create("TeX/ChapterCommunity")
 
 panelSMSspecies <- function(year=1990) {
   SMS <- read.csv("Data/SMS 2008.csv",sep=";")
@@ -363,7 +363,7 @@ plotDynamicCommunity <- function() {
   
   grid <- plot_grid(fig,figF,figM,figR, ncol=1, align="v",
                     rel_heights = c(2,1,1.3,1.3))
-  ggsave("ChapterCommunity/DynamicCommunity.pdf", grid, height=3*height, width=singlewidth)  
+  ggsave("TeX/ChapterCommunity/DynamicCommunity.pdf", grid, height=3*height, width=singlewidth)  
 }
 
 #
@@ -379,9 +379,9 @@ plotDD <- function() {
 
 plotAllChapterCommunity <- function() 
 {
-  pdfplot("ChapterCommunity/spectra.pdf", plotSpectra, width=doublewidth, height = height)
-  pdfplot("ChapterCommunity/ExtendedSheldon.pdf", plotExtendedSheldon, width=singlewidth, height=height)
-  pdfplot("ChapterCommunity/RmaxSensitivity.pdf", plotRmaxSensitivity, width=1.5*singlewidth, height=height)
+  pdfplot("TeX/ChapterCommunity/spectra.pdf", plotSpectra, width=doublewidth, height = height)
+  pdfplot("TeX/ChapterCommunity/ExtendedSheldon.pdf", plotExtendedSheldon, width=singlewidth, height=height)
+  pdfplot("TeX/ChapterCommunity/RmaxSensitivity.pdf", plotRmaxSensitivity, width=1.5*singlewidth, height=height)
 
   plotDynamicCommunity()
   

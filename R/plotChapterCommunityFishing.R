@@ -1,5 +1,5 @@
 #
-# Chapter 9
+# TeX/Chapter 9
 #
 
 source("R/basetools.R")
@@ -7,7 +7,7 @@ source("R/basefunctions.R")
 source("R/baseparameters.R")
 source("R/community.R")
 
-dir.create("ChapterCommunityFishing")
+dir.create("TeX/ChapterCommunityFishing")
 
 plotDaan <- function()
 {
@@ -157,7 +157,7 @@ plotCascades <- function(nSpecies=27) {
   
   fig <- plot_grid(panel1, panel2, ncol=2, align="h", 
                    rel_widths = c(1.3,1))
-  ggsave("ChapterCommunityFishing/Cascades.pdf", fig, width=doublewidth, height=2.5*height)
+  ggsave("TeX/ChapterCommunityFishing/Cascades.pdf", fig, width=doublewidth, height=2.5*height)
   fig
 }
 
@@ -268,7 +268,7 @@ plotForagefishing <- function() {
   
   grid <- plot_grid(figFF, figFP, figFB, ncol=3, align="h", 
                     rel_widths = c(1.4,1,1))
-  ggsave("ChapterCommunityFishing/Foragefishing.pdf", grid,
+  ggsave("TeX/ChapterCommunityFishing/Foragefishing.pdf", grid,
          width=doublewidth, height=height)
 }
 
@@ -340,7 +340,7 @@ plotYieldvsF <- function() {
   
   
   grid <- plot_grid(fig,fig3, ncol=2, align="h")
-  ggsave("ChapterCommunityFishing/yield.pdf", grid , width=doublewidth, height=height)
+  ggsave("TeX/ChapterCommunityFishing/yield.pdf", grid , width=doublewidth, height=height)
 }
 
 
@@ -725,12 +725,12 @@ plotDoubleYield <- function() {
 
 
 plotAllChapterCommunityFishing <- function() {
-  pdfplot("ChapterCommunityFishing/Daan.pdf", plotDaan, width=1.3*singlewidth, height=height)
+  pdfplot("TeX/ChapterCommunityFishing/Daan.pdf", plotDaan, width=1.3*singlewidth, height=height)
   plotCascades()
   plotForagefishing()
   plotYieldvsF()
-  pdfplot("ChapterCommunityFishing/CommunityMSY.pdf", plotCommunityMSY, width=doublewidth, height=height)
-  pdfplot("ChapterCommunityFishing/RefvsF.pdf", plotRefvsF, width=1.3*singlewidth, height=height)
+  pdfplot("TeX/ChapterCommunityFishing/CommunityMSY.pdf", plotCommunityMSY, width=doublewidth, height=height)
+  pdfplot("TeX/ChapterCommunityFishing/RefvsF.pdf", plotRefvsF, width=1.3*singlewidth, height=height)
 }
 
 
