@@ -338,9 +338,18 @@ plotYieldvsF <- function() {
     annotate("text", x=.5, y=1e5, label="b", hjust=1, vjust=1)
   fig3 <- semilogy(fig3)
   
-  
   grid <- plot_grid(fig,fig3, ncol=2, align="h")
   ggsave("TeX/ChapterCommunityFishing/yield.pdf", grid , width=doublewidth, height=height)
+  
+  defaultplot()
+  loglogpanel(xlim=dat2$W, ylim=c(1e-2,10))
+  W = unique(dat2$W)
+  lines(W, dat2$B[dat2$F==0], lwd=3)
+lines(W, dat2$B[dat2$F==dat$F[4]], lwd=3)
+lines(W, dat2$B[dat2$F==dat$F[8]], lwd=3)
+lines(W, dat2$B[dat2$F==dat$F[11]], lwd=3, col="red")
+lines(W, dat2$B[dat2$F==dat$F[20]], lwd=3, col="green")
+
 }
 
 

@@ -389,7 +389,8 @@ SingleStockCalculatorServer <- function(input, output, session) {
               sprintf("%0.3f &percnt;/year",100*response$dAdt),
               sprintf("%0.3f &percnt;/year",100*response$dkrdt)))
     
-    return(list(param=param, spec0=spec0, spec=spec, refs=refs, response=response, physparameters=physparameters, table=results))#, parameters=parameters))
+    return(list(param=param, spec0=spec0, spec=spec, refs=refs, 
+                response=response, physparameters=physparameters, table=results))#, parameters=parameters))
   })
   #
   # Table with physiological parameters

@@ -389,7 +389,8 @@ plotSpatialPlaice = function() {
   plaice1$lCPUE = (plaice1$CPUE_number_per_hour)/(max(plaice1$CPUE_number_per_hour))
   
   plaice1 <- plaice1[with(plaice1, order(lCPUE)),]
-  Idx <- which.min((pop_n*sum(plaice1$CPUE_number_per_hour)-cumsum(sort(plaice1$CPUE_number_per_hour, decreasing = F)))^2)
+  Idx <- which.min((pop_n*sum(plaice1$CPUE_number_per_hour) 
+                    -cumsum(sort(plaice1$CPUE_number_per_hour, decreasing = F)))^2)
   
   plaice1_plot <- plaice1[1:Idx,]
   
