@@ -1,12 +1,5 @@
 # Fish
-R-code for the models and figures in "Fish: Ecology, Evolution, and Exploitation", including a web-app.
+R-code to plot all figures in K.H. Andersen (2019) "Fish: Ecology, Evolution, and Exploitation", Princeton University Press.
 
-The code consists of:
-* SingleStockCalculator.R.  Shiny web app to simulate all aspects of a single stock.
-* baseparameters.R.         The default set of parameters for the single-stock model
-* basefunctions.R.          Functions to do all the basic calculations of the single-stock model
-* basetools.R.              Functions for plotting
-* QuantitativeGenetics.R.   Functions for the QG calculations in chapter 6
-* community.R.              Functions for the community model in chapters 8 and 9
-* plotChapter*.R.           Functions to plot all the figures in each chapter
+plotChapter*.R.           Functions to plot all the figures in each chapter
  
