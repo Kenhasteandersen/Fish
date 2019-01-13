@@ -1,11 +1,8 @@
 #
 # Chapter 8
 #
-
+library(fishsizespectrum)
 source("R/basetools.R")
-source("R/basefunctions.R")
-source("R/baseparameters.R")
-source("R/community.R")
 
 require(cowplot)
 require(gam)

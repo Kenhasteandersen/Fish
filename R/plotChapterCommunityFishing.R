@@ -1,11 +1,8 @@
 #
 # TeX/Chapter 9
 #
-
+library(fishsizespectrum)
 source("R/basetools.R")
-source("R/basefunctions.R")
-source("R/baseparameters.R")
-source("R/community.R")
 
 dir.create("TeX/ChapterCommunityFishing")
 

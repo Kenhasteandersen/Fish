@@ -1,7 +1,5 @@
+library(fishsizespectrum)
 source("R/basetools.R")
-source("R/basefunctions.R")
-source("R/baseparameters.R")
-source("R/community.R")
 
 dir.create("TeX/ChapterSharks_vs_teleosts")
 

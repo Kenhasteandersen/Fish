@@ -1,6 +1,10 @@
 #
 # Plot all figures
 #
+devtools::install_github("https://github.com/Kenhasteandersen/FishSizeSpectrum.git")
+
+bRecalcExpensiveFunctions = FALSE
+
 plotAllFigures = function(bRecalcExpensiveFunctionsFlag=FALSE) {
   # 
   # Note: update the flag "bRecalcExpensiveFunctions <- FALSE" in basefunction.R

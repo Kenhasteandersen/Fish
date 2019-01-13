@@ -1,10 +1,10 @@
 #
 # Plots for TeX/Chapter 2
 # 
-
+library(fishsizespectrum)
 source("R/basetools.R")
-source("R/basefunctions.R")
-source("R/baseparameters.R")
+#source("R/basefunctions.R")
+#source("R/baseparameters.R")
 source("R/PlotChapterIndividual.R")
 
 dir.create("TeX/ChapterSizeSpectrumTheory")
@@ -504,14 +504,17 @@ plotUrsin <- function() {
 }
 
 plotPredPrey <- function() {
-  dat <- read.csv("Data/Predator_and_prey_body_sizes_in_marine_food_webs_vsn4.dat",header=TRUE,sep="\t")
+  dat <- read.csv("Data/Pred-prey body sizes.csv", header=TRUE, sep="\t")
+    
+  dat$Prey.mass = as.double(dat$Prey.mass)
+  dat$Predator.mass = as.double(dat$Predator.mass)
   # Get only fish:
   ixFish <- dat$Predator..taxon=="ectotherm vertebrate"
   dat <- dat[ixFish,]
   # Fix prey measured in mg:
   ix = dat$Prey.mass.unit=="mg"
   dat$Prey.mass[ix] = dat$Prey.mass[ix]/1000
-  
+
   # --------------
   fig <- ggplot()
   
@@ -778,9 +781,9 @@ plotAllChapterSizeSpectrumTheory <- function()
   plotSheldon()
   plotClearance()
   plotImax()
-  #pdfplot("TeX/ChapterSizeSpectrumTheory/PredPrey.pdf", plotPredPrey, width=singlewidth, height=singlewidth)
-  plotPredPrey()
+  # Currently broken:
+  #plotPredPrey()
   plotUrsin()
   pdfplot("TeX/ChapterSizeSpectrumTheory/Calculations.pdf", plotCalculations, width=5, height=height)
-  plotMortality()
+  fig=plotMortality()
 }

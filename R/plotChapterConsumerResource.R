@@ -1,7 +1,5 @@
+library(fishsizespectrum)
 source("R/basetools.R")
-source("R/basefunctions.R")
-source("R/baseparameters.R")
-source("R/community.R")
 
 dir.create("TeX/ChapterConsumerResource")
 
@@ -637,5 +635,5 @@ plotAllChapterConsumerResource = function() {
           plotFishingvsWf, width=doublewidth, height=height)
   pdfplot("TeX/ChapterConsumerResource/OptimalEtaF.pdf",
           plotOptimalEtaF, width=doublewidth, height=height)
-  plotSpatialPlaice()
+  plotSpatialPlaice() # Currently broken
 }

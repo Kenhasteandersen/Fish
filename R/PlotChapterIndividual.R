@@ -1,9 +1,10 @@
 #
 # TeX/Chapter 3
 #
+library(fishsizespectrum)
 source("R/basetools.R")
-source("R/baseparameters.R")
-source("R/basefunctions.R")
+#source("R/baseparameters.R")
+#source("R/basefunctions.R")
 
 dir.create("TeX/ChapterIndividual")
 
