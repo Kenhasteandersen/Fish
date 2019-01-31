@@ -8,14 +8,13 @@
 #setwd("~/Documents/Projects/Fish")
 library(shiny)
 source("R/basetools.R")
-source("R/basefunctions.R")
-source("R/baseparameters.R")
-source("R/QuantitativeGenetics.R")
+library(fishsizespectrum)
 
 # Define the user interface
 SingleStockCalculatorUI <- fluidPage(
-  # Make rules widers:
   tags$head(
+    includeHTML(("R/googleanalytics.html")),
+  # Make rules widers:
     tags$style(HTML("hr {border-top: 1px solid #444444;}"))
   ),
   #
