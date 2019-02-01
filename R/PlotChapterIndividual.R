@@ -3,8 +3,6 @@
 #
 library(fishsizespectrum)
 source("R/basetools.R")
-#source("R/baseparameters.R")
-#source("R/basefunctions.R")
 
 dir.create("TeX/ChapterIndividual")
 

@@ -3,8 +3,6 @@
 #
 library(fishsizespectrum)
 source("R/basetools.R")
-#source("R/basefunctions.R")
-#source("R/baseparameters.R")
 
 dir.create("TeX/ChapterDemography")
 
